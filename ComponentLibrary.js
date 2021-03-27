@@ -67,7 +67,7 @@ export const LibraryStyles = StyleSheet.create({
   container: {
     width: screenDimensions.screenWidth,
     height: screenDimensions.screenHeight + Constants.statusBarHeight,
-    backgroundColor: Colors.dark,
+    backgroundColor: Colors.lightPink,
     paddingTop: Constants.statusBarHeight,
   },
   normalText: {
