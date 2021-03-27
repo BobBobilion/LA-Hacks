@@ -10,7 +10,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app! Have fun!</Text>
+        <Text style={styles.text}>Open up App.js to start working on your app! Have fun!</Text>
         <StatusBar style="auto" />
       </View>
     );
@@ -24,4 +24,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text: {
+    color: lightColor,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+  }
 });
