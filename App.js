@@ -16,10 +16,11 @@ export default class App extends React.Component {
     openClass: 0,
     showGoing: 0,
     date: '',
-    nameC: '',
+    nameClass: '',
     link: '',
     timeStart: '',
     timeEnd: '',
+    meetingToday: [],
   }
 
   constructor() {
@@ -52,22 +53,9 @@ export default class App extends React.Component {
     this.setState({ dummy: true});
   }
   
-    className = () => {
-      
+  addClassFinish = () => {
+    
   }
-
-    linkFunc = () => {
-
-  }
-
-    timeSFunc = () => {
-
-  }
-
-    timeEFunc = () => {
-
-  }
-
 
 
 
@@ -85,10 +73,15 @@ export default class App extends React.Component {
         {this.state.openClass == 1 ? 
         <View>
           <Text>Please Enter:</Text>
-          <TextInput onPress={(nameClass) => this.className(nameClass)} style={styles.zoomInput} value={this.state.nameC} placeholder={"Class Name"}/>
-          <TextInput onPress={(link) => this.linkFunc(linkInput)} style={styles.zoomInput} value={this.state.link} placeholder={"Zoom Link"}/>
-          <TextInput onPress={(timeS) => this.timeSFunc(timeS)} style={styles.zoomInput} value={this.state.timeStart} placeholder={"Start Time"}/>
-          <TextInput onPress={(timeE) => this.timeEFunc(timeE)} style={styles.zoomInput} value={this.state.timeEnd} placeholder={"End Time"}/>
+          <TextInput onChangeText={(nameClass) => this.setState({ nameClass })} style={styles.zoomInput} value={this.state.nameClass} placeholder={"Class Name"}/>
+          <TextInput onChangeText={(link) => this.setState({ link })} style={styles.zoomInput} value={this.state.link} placeholder={"Zoom Link"}/>
+          <TextInput onChangeText={(timeStart) => this.setState({ timeStart })} style={styles.zoomInput} value={this.state.timeStart} placeholder={"Start Time"}/>
+          <TextInput onChangeText={(timeEnd) => this.setState({ timeEnd })} style={styles.zoomInput} value={this.state.timeEnd} placeholder={"End Time"}/>
+          <Pressable onPress={() => this.addClassFinish()}>
+            <Text>
+              Click to Add
+            </Text>
+          </Pressable>
         </View> 
         : null}
         </View>
