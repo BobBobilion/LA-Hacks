@@ -174,7 +174,7 @@ export default class App extends React.Component {
         onSwipe={(direction) => this.onSwipe(direction)}
         style={LibraryStyles.container}>
         <View
-          source={require('/assets/agatha-all-along.jpg')}
+          source={require('./assets/icon.png')} 
           style={{
             backgroundColor: Colors.accent1,
             position: 'absolute',
@@ -188,7 +188,7 @@ export default class App extends React.Component {
           }}
         />
         <View
-          source={require('/assets/Pikachu_Render.png')}
+          source={require('./assets/favicon.png')}
           style={{
             backgroundColor: Colors.accent2,
             position: 'absolute',
