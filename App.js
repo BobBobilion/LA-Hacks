@@ -11,23 +11,59 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Pressable style={styles.playButton} >
-          <Text style={styles.playText}>▶️</Text>
-        </Pressable>
+      <View style={LibraryStyles.container}>
+        <View style={styles.assignmentBox}>
+        <Text style={styles.sectionTitles}>Zoom Links</Text>
+        </View>
+        <View style={styles.assignmentBox}>
+        <Text style={styles.sectionTitles}>Assignments</Text>
+          <View style={{ flexDirection: 'column' }}>
+            <Button
+              onPress={() => console.log('button 1 pressed')}
+              onPressIn={() => console.log('pressIn')}
+              onPressOut={() => console.log('pressOut')}
+              onLongPress={() => console.log('Longpress')}>
+              button 1
+            </Button>
+            <View style={styles.assignments}><Text>oi;jasdf</Text></View>
+          </View>
+        </View>
+        
+        <NormalText>
+          width: {screenWidth} & height: {screenHeight}
+        </NormalText>
+
+        <View style={{ flexDirection: 'row' }}>
+          <Button
+            onPress={() => console.log('button 1 pressed')}
+            onPressIn={() => console.log('pressIn')}
+            onPressOut={() => console.log('pressOut')}
+            onLongPress={() => console.log('Longpress')}>
+            button 1
+          </Button>
+          <Title>Essays</Title>
+        </View>
       </View>
     );
   }
-}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: Constants.statusBarHeight,
-    justifyContent: 'center',
+  assignmentBox: {
+    backgroundColor : Colors.green,
+    margin : screenWidth*.05,
+    padding: 10,
+    width: screenWidth*.9,
   },
-  playText: {
-    fontSize: 96,
-    textAlign: 'center',
+  sectionTitles: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
+  assignments: {
+    borderRadius: 3,
+    borderWidth: 2,
+    margin: screenWidth*.02,
+    backgroundColor: Colors.yellow,
+    padding: 3,
+  }
 });
