@@ -75,9 +75,9 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   assignmentBox: {
     backgroundColor: Colors.green,
-    margin: screenDimensions.screenWidth * 0.05,
+    margin: screenDimensions.screenWidth * 0.1,
     padding: 10,
-    width: screenDimensions.screenWidth * 0.9,
+    width: screenDimensions.screenWidth * 0.8,
   },
   sectionTitles: {
     fontSize: 20,
