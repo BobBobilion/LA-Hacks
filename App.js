@@ -2,6 +2,13 @@ import * as React from 'react';
 import { Text, View, Pressable, Image, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
  
+export const Colors = {
+  pink: '#FFC9DD',
+  lightPink: '#B1C7FF',
+  blue: '#96B4FF',
+  yellow: '#FFE196',
+  green: '#A3FFAA',
+  }
 
 export default class App extends React.Component {
 
@@ -9,6 +16,7 @@ export default class App extends React.Component {
     super();
   }
 
+  
   render() {
     return (
       <View style={LibraryStyles.container}>
