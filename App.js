@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   zoomInput: {
-    width: (screenWidth * .9)/2,
+    width: (screenDimensions.screenWidth * .9)/2,
   }
 });
   
