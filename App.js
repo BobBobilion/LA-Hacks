@@ -57,7 +57,8 @@ export default class App extends React.Component {
           width: {screenDimensions.screenWidth} & height: {screenDimensions.screenHeight}
         </NormalText>
 
-        <View style={{ flexDirection: 'row' }}>
+        <View style={styles.sectionBox}>
+          <Title style={styles.sectionTitles}>Zoom Meetings</Title>
           <Button
             onPress={() => console.log('button 1 pressed')}
             onPressIn={() => console.log('pressIn')}
@@ -65,7 +66,6 @@ export default class App extends React.Component {
             onLongPress={() => console.log('Longpress')}>
             button 1
           </Button>
-          <Title>Essays</Title>
         </View>
       </View>
     );
