@@ -9,19 +9,42 @@ import {
   Button,
   LibraryStyles,
 } from './ComponentLibrary';
+import { Data } from './Data';
 
 export default class App extends React.Component {
+
+  constructor() {
+    super();
+    let assignments = [];
+
+    Data.forEach((element, index) => {
+      let className = element.ClassName;
+      let assignmentName = element.AssignmentName;
+      let dueDate = element.DueDate;
+      let assignment = {
+        Class: className,
+        Assignment: assignmentName,
+        Due: dueDate,
+      };
+      assignments.push(assignment);
+    });
+
+    this.state = {
+      assignments,
+    }
+    
+  }
 
   state = {
     openClass: 0,
     showGoing: 0,
     date: '',
+    nameC: '',
+    link: '',
+    timeStart: '',
+    timeEnd: '',
   }
 
-  constructor() {
-    super();
-    
-  }
 
   //UPDATE WINDOW
   updateWindow = () => {
@@ -39,6 +62,17 @@ export default class App extends React.Component {
     this.setDate();
   }
 
+  //MAKES A TABLE FOR ASSIGNMENTS
+  listAssignments = () => {
+    return this.state.assignments.map((assignment) => (
+      <View style={styles.tables}>
+        <View style={{flex:.2}}><Text>{assignment.Class}:</Text></View>
+        <View style={{flex:.3}}><Text>{assignment.Assignment}</Text></View>
+        <View style={{flex:.1}}><Text>{assignment.Due}</Text></View>
+      </View>  
+    )) 
+  }
+
   setDate = () => {
     this.setState({date: new Date().getDate()});
   }
@@ -51,6 +85,20 @@ export default class App extends React.Component {
     className = () => {
       
   }
+
+    linkFunc = () => {
+
+  }
+
+    timeSFunc = () => {
+
+  }
+
+    timeEFunc = () => {
+
+  }
+
+
 
 
   render() {
@@ -69,10 +117,10 @@ export default class App extends React.Component {
         {this.state.openClass == 1 ? 
         <View>
           <Text>Please Enter:</Text>
-          <TextInput onPress={(nameClass) => this.className(nameClass)} style={styles.zoomInput} placeholder={"Class Name"}/>
-          <TextInput onPress={(link) => this.className(link)} style={styles.zoomInput} placeholder={"Zoom Link"}/>
-          <TextInput onPress={(timeS) => this.className(timeS)} style={styles.zoomInput} placeholder={"Start Time"}/>
-          <TextInput onPress={(timeE) => this.className(timeE)} style={styles.zoomInput} placeholder={"End Time"}/>
+          <TextInput onPress={(nameClass) => this.className(nameClass)} style={styles.zoomInput} value={this.state.nameC} placeholder={"Class Name"}/>
+          <TextInput onPress={(link) => this.linkFunc(linkInput)} style={styles.zoomInput} value={this.state.link} placeholder={"Zoom Link"}/>
+          <TextInput onPress={(timeS) => this.timeSFunc(timeS)} style={styles.zoomInput} value={this.state.timeStart} placeholder={"Start Time"}/>
+          <TextInput onPress={(timeE) => this.timeEFunc(timeE)} style={styles.zoomInput} value={this.state.timeEnd} placeholder={"End Time"}/>
         </View> 
         : null}
         </View>
@@ -106,6 +154,12 @@ export default class App extends React.Component {
               onLongPress={() => console.log('Longpress')}>
               button 1
             </Button>
+            <View style={styles.tables}>
+              <View style={{flex:.2}}><Text>Class</Text></View>
+              <View style={{flex:.3}}><Text>Assignment Name</Text></View>
+              <View style={{flex:.1}}><Text>Due Date</Text></View>
+            </View>  
+            <View style={styles.table}>{this.listAssignments()}</View>
             <View style={styles.assignments}>
               <Text>oi;jasdf</Text>
             </View>
@@ -171,6 +225,11 @@ const styles = StyleSheet.create({
   },
   zoomInput: {
     width: (screenDimensions.screenWidth * .9)/2,
+  },
+  tables: {
+    margin: screenDimensions.screenWidth*.4,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 });
   
