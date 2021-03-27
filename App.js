@@ -23,11 +23,11 @@ const targetShrinkRatio = 0.9;
 const targetChangeDirectionChance = 0.07;
 const immuneTime = 30;
 const fps = 60;
-const lavender = '#A994FF';
-const darkLavender = '#878DE8';
-const blue = '#A0BFFF';
-const darkblue = '#87C1E8';
-const cyan = '#94F0FF';
+const pink = '#FFC9DD';
+const lightPink = '#B1C7FF';
+const blue = '#96B4FF';
+const yellow = '#FFE196';
+const green = '#A3FFAA';
 
 
 
