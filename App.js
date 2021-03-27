@@ -110,9 +110,9 @@ export default class App extends React.Component {
   listAssignments = () => {
     return this.state.assignments.map((assignment) => (
       <View style={styles.tables}>
-        <View style={{flex:1}}><Text>   -{assignment.Class}</Text></View>
-        <View style={{flex:1}}><Text>   -{assignment.Assignment}</Text></View>
-        <View style={{flex:1}}><Text>   -{assignment.Due}</Text></View>
+        <View style={{flex:1}}><NormalText>    - {assignment.Class}</NormalText></View>
+        <View style={{flex:1}}><NormalText>    - {assignment.Assignment}</NormalText></View>
+        <View style={{flex:1}}><NormalText>    - {assignment.Due}</NormalText></View>
       </View>  
     )) 
   }
@@ -172,6 +172,12 @@ export default class App extends React.Component {
               onLongPress={() => console.log('Longpress')}>
               button 1
             </Button>
+            <View style={styles.tables}>
+            <View style={{flex:1}}><NormalText>Class:</NormalText></View>
+              <View style={{flex:1}}><NormalText>Assignment Name:</NormalText></View>
+              <View style={{flex:1}}><NormalText>Due Date:</NormalText></View>
+            </View>  
+            <View style={styles.table}>{this.listAssignments()}</View>
             <View style={styles.assignments}>
               <Text>oi;jasdf</Text>
             </View>
@@ -190,12 +196,7 @@ export default class App extends React.Component {
               onLongPress={() => console.log('Longpress')}>
               button 1
             </Button>
-            <View style={styles.tables}>
-            <View style={{flex:1}}><Text>Class:</Text></View>
-              <View style={{flex:1}}><Text>Assignment Name:</Text></View>
-              <View style={{flex:1}}><Text>Due Date:</Text></View>
-            </View>  
-            <View style={styles.table}>{this.listAssignments()}</View>
+            
             <View style={styles.assignments}>
               <Text>oi;jasdf</Text>
             </View>
@@ -263,9 +264,10 @@ const styles = StyleSheet.create({
     width: (screenDimensions.screenWidth * .9)/2,
   },
   tables: {
-    marginHorizontal: (screenDimensions.screenWidth*.05)/4,
+    marginHorizontal: (screenDimensions.screenWidth*.1)/4,
     marginVertical: 1,
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-around'
   }
 });
