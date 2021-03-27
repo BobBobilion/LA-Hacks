@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, Pressable, Image, StyleSheet, Dimensions, TextInput } from 'react-native';
 import Constants from 'expo-constants';
 import {
   screenDimensions,
@@ -15,6 +15,7 @@ export default class App extends React.Component {
   state = {
     openClass: 0,
     showGoing: 0,
+    date: '',
   }
 
   constructor() {
@@ -35,6 +36,11 @@ export default class App extends React.Component {
     this.counter = setInterval(() => {
       this.updateWindow();
     }, 500);
+    this.setDate();
+  }
+
+  setDate = () => {
+    this.setState({date: new Date().getDate()});
   }
 
   addClass = () => {
