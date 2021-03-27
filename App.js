@@ -1,17 +1,7 @@
 import * as React from 'react';
 import { Text, View, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
- 
-let screenWidth = Dimensions.get('window').width;
-let screenHeight = Dimensions.get('window').height;
-
-export const Colors = {
-  pink: '#FFC9DD',
-  lightPink: '#B1C7FF',
-  blue: '#96B4FF',
-  yellow: '#FFE196',
-  green: '#A3FFAA',
-  }
+import {} from './ComponentLibrary'
 
 export default class App extends React.Component {
 
