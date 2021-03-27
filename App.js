@@ -110,9 +110,9 @@ export default class App extends React.Component {
   listAssignments = () => {
     return this.state.assignments.map((assignment) => (
       <View style={styles.tables}>
-        <View style={{flex:.2}}><Text>{assignment.Class}:</Text></View>
-        <View style={{flex:.3}}><Text>{assignment.Assignment}</Text></View>
-        <View style={{flex:.1}}><Text>{assignment.Due}</Text></View>
+        <View style={{flex:1}}><Text>   -{assignment.Class}</Text></View>
+        <View style={{flex:1}}><Text>   -{assignment.Assignment}</Text></View>
+        <View style={{flex:1}}><Text>   -{assignment.Due}</Text></View>
       </View>  
     )) 
   }
@@ -126,22 +126,9 @@ export default class App extends React.Component {
     this.setState({ dummy: true});
   }
   
-    className = () => {
-      
+  addClassFinish = () => {
+    
   }
-
-    linkFunc = () => {
-
-  }
-
-    timeSFunc = () => {
-
-  }
-
-    timeEFunc = () => {
-
-  }
-
 
 
 
@@ -161,10 +148,15 @@ export default class App extends React.Component {
         {this.state.openClass == 1 ? 
         <View>
           <Text>Please Enter:</Text>
-          <TextInput onPress={(nameClass) => this.className(nameClass)} style={styles.zoomInput} value={this.state.nameC} placeholder={"Class Name"}/>
-          <TextInput onPress={(link) => this.linkFunc(linkInput)} style={styles.zoomInput} value={this.state.link} placeholder={"Zoom Link"}/>
-          <TextInput onPress={(timeS) => this.timeSFunc(timeS)} style={styles.zoomInput} value={this.state.timeStart} placeholder={"Start Time"}/>
-          <TextInput onPress={(timeE) => this.timeEFunc(timeE)} style={styles.zoomInput} value={this.state.timeEnd} placeholder={"End Time"}/>
+          <TextInput onChangeText={(nameClass) => this.setState({ nameClass })} style={styles.zoomInput} value={this.state.nameClass} placeholder={"Class Name"}/>
+          <TextInput onChangeText={(link) => this.setState({ link })} style={styles.zoomInput} value={this.state.link} placeholder={"Zoom Link"}/>
+          <TextInput onChangeText={(timeStart) => this.setState({ timeStart })} style={styles.zoomInput} value={this.state.timeStart} placeholder={"Start Time"}/>
+          <TextInput onChangeText={(timeEnd) => this.setState({ timeEnd })} style={styles.zoomInput} value={this.state.timeEnd} placeholder={"End Time"}/>
+          <Pressable onPress={() => this.addClassFinish()}>
+            <Text>
+              Click to Add
+            </Text>
+          </Pressable>
         </View> 
         : null}
         </View>
@@ -199,9 +191,9 @@ export default class App extends React.Component {
               button 1
             </Button>
             <View style={styles.tables}>
-              <View style={{flex:.2}}><Text>Class</Text></View>
-              <View style={{flex:.3}}><Text>Assignment Name</Text></View>
-              <View style={{flex:.1}}><Text>Due Date</Text></View>
+            <View style={{flex:1}}><Text>Class:</Text></View>
+              <View style={{flex:1}}><Text>Assignment Name:</Text></View>
+              <View style={{flex:1}}><Text>Due Date:</Text></View>
             </View>  
             <View style={styles.table}>{this.listAssignments()}</View>
             <View style={styles.assignments}>
@@ -271,7 +263,8 @@ const styles = StyleSheet.create({
     width: (screenDimensions.screenWidth * .9)/2,
   },
   tables: {
-    margin: screenDimensions.screenWidth*.4,
+    marginHorizontal: (screenDimensions.screenWidth*.05)/4,
+    marginVertical: 1,
     flexDirection: 'row',
     justifyContent: 'space-around'
   }
