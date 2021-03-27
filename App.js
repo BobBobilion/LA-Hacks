@@ -1,12 +1,23 @@
 import * as React from 'react';
-import { Text, View, Pressable, Image, StyleSheet } from 'react-native';
+import { Text, View, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
  
+let screenWidth = Dimensions.get('window').width;
+let screenHeight = Dimensions.get('window').height;
+
+export const Colors = {
+  pink: '#FFC9DD',
+  lightPink: '#B1C7FF',
+  blue: '#96B4FF',
+  yellow: '#FFE196',
+  green: '#A3FFAA',
+  }
 
 export default class App extends React.Component {
 
   constructor() {
     super();
+    
   }
   render() {
     return (
@@ -54,10 +65,9 @@ const styles = StyleSheet.create({
     padding: 10,
     width: screenWidth * 0.9,
   },
-  sectionTitles: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
+  playText: {
+    fontSize: screenWidth/2,
+    textAlign: 'center',
   },
   expandButton: {},
 });
