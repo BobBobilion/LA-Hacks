@@ -5,6 +5,13 @@ import Constants from 'expo-constants';
 let screenWidth = Dimensions.get('window').width;
 let screenHeight = Dimensions.get('window').height;
 
+export const Colors = {
+  pink: '#FFC9DD',
+  lightPink: '#B1C7FF',
+  blue: '#96B4FF',
+  yellow: '#FFE196',
+  green: '#A3FFAA',
+  }
 
 export default class App extends React.Component {
 
@@ -28,6 +35,7 @@ export default class App extends React.Component {
     }, 500);
   }
 
+  
   render() {
     return (
       <View style={styles.container}>
@@ -57,3 +65,4 @@ styles = StyleSheet.create({
     padding: 3,
   }
 });
+}
