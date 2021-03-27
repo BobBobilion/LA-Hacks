@@ -7,7 +7,7 @@ export default class App {
   render = () => {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>fasdfssd sdf
+        <Text>Open up App.js to start working on your app! Have fun</Text>fasdfssd sdf
         <StatusBar style="auto" />
       </View>
     );
