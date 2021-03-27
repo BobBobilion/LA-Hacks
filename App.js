@@ -37,16 +37,23 @@ export default class App extends React.Component {
       </View>
     );
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: Constants.statusBarHeight,
-    justifyContent: 'center',
+styles = StyleSheet.create({
+  assignmentBox: {
+    backgroundColor : Colors.green,
+    margin : screenWidth*.05,
+    padding: 10,
+    width: screenWidth*.9,
   },
   playText: {
     fontSize: screenWidth/2,
     textAlign: 'center',
   },
+  assignments: {
+    borderRadius: 3,
+    borderWidth: 2,
+    margin: screenWidth*.02,
+    backgroundColor: Colors.yellow,
+    padding: 3,
+  }
 });
