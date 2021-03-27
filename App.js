@@ -17,7 +17,6 @@ import {
   Button,
   LibraryStyles,
 } from './ComponentLibrary';
-import GestureRecognizer from 'react-native-swipe-gestures';
 
 const timeLimit = 900;
 const targetShrinkRatio = 0.9;
@@ -145,7 +144,7 @@ export default class App extends React.Component {
     this.screenRefresher = setInterval(this.update, 1000 / fps);
   };
 
-  //CHANGES DIRECTION BY SWIPE
+  // CHANGES DIRECTION BY SWIPE
   onSwipe = (direction) => {
     let player = this.state.player;
     switch (direction) {
@@ -172,9 +171,8 @@ export default class App extends React.Component {
   render() {
     let { player, target } = this.state;
     return (
-      <GestureRecognizer
-        onSwipe={(direction) => this.onSwipe(direction)}
-        style={LibraryStyles.container}>
+        <View
+        style={{backgroundColor:"#fff"}}>
         <View
           source={require('./assets/icon.png')} 
           style={{
@@ -201,11 +199,10 @@ export default class App extends React.Component {
             borderRadius: player.radius,
           }}
         />
-        {this.state.counter > timeLimit ? (
-          <Button onPress={() => this.reset()}>Game Over. Play again? </Button>
+        {this.state.counter > timeLimit ? (<View/>
         ) : null}
         <NormalText>score: {player.score}</NormalText>
-      </GestureRecognizer>
+      </View>
     );
   }
 }
