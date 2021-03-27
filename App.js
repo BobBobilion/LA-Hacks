@@ -9,8 +9,31 @@ import {
   Button,
   LibraryStyles,
 } from './ComponentLibrary';
+import { Data } from './Data';
 
 export default class App extends React.Component {
+
+  constructor() {
+    super();
+    let assignments = [];
+
+    Data.forEach((element, index) => {
+      let className = element.ClassName;
+      let assignmentName = element.AssignmentName;
+      let dueDate = element.DueDate;
+      let assignment = {
+        Class: className,
+        Assignment: assignmentName,
+        Due: dueDate,
+      };
+      assignments.push(assignment);
+    });
+
+    this.state = {
+      assignments,
+    }
+    
+  }
 
   state = {
     openClass: 0,
@@ -23,10 +46,6 @@ export default class App extends React.Component {
     meetingToday: [],
   }
 
-  constructor() {
-    super();
-    
-  }
 
   //UPDATE WINDOW
   updateWindow = () => {
@@ -42,6 +61,17 @@ export default class App extends React.Component {
       this.updateWindow();
     }, 500);
     this.setDate();
+  }
+
+  //MAKES A TABLE FOR ASSIGNMENTS
+  listAssignments = () => {
+    return this.state.assignments.map((assignment) => (
+      <View style={styles.tables}>
+        <View style={{flex:.2}}><Text>{assignment.Class}:</Text></View>
+        <View style={{flex:.3}}><Text>{assignment.Assignment}</Text></View>
+        <View style={{flex:.1}}><Text>{assignment.Due}</Text></View>
+      </View>  
+    )) 
   }
 
   setDate = () => {
@@ -63,10 +93,12 @@ export default class App extends React.Component {
     return (
       <View style={LibraryStyles.container}>
         <View style={styles.assignmentBox}>
-        <View style={{flexDirection: "row"}}>
-          <Text style={styles.sectionTitles}>Meeting Links</Text>
-          <Pressable style={styles.addition} onPress={() => this.addClass()}>+</Pressable> 
-        </View>
+          <View style={{flexDirection: "row"}}>
+            <View style={styles.headerBox}>
+              <Text style={styles.sectionTitles}>Meeting Links</Text>
+            </View>
+            <Pressable style={styles.addition} onPress={() => this.addClass()}>+</Pressable> 
+          </View>
         <View>
         {this.state.showGoing == 1 ? <View><Text>OnGoing Meetings</Text><Text>{onGoingTime}{onGoingClass}</Text></View> : null}
         </View>
@@ -86,7 +118,9 @@ export default class App extends React.Component {
         : null}
         </View>
         <View style={styles.assignmentBox}>
-          <Text style={styles.sectionTitles}>Assignments</Text>
+          <View style={styles.headerBox}>
+            <Text style={styles.sectionTitles}>Assignments</Text>
+          </View>
           <View style={{ flexDirection: 'column' }}>
             <Button
               onPress={() => console.log('button 1 pressed')}
@@ -95,6 +129,30 @@ export default class App extends React.Component {
               onLongPress={() => console.log('Longpress')}>
               button 1
             </Button>
+            <View style={styles.assignments}>
+              <Text>oi;jasdf</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.assignmentBox}>
+          <View style={styles.headerBox}>
+            <Text style={styles.sectionTitles}>Grades</Text>
+          </View>
+          <View style={{ flexDirection: 'column' }}>
+            <Button
+              onPress={() => console.log('button 1 pressed')}
+              onPressIn={() => console.log('pressIn')}
+              onPressOut={() => console.log('pressOut')}
+              onLongPress={() => console.log('Longpress')}>
+              button 1
+            </Button>
+            <View style={styles.tables}>
+              <View style={{flex:.2}}><Text>Class</Text></View>
+              <View style={{flex:.3}}><Text>Assignment Name</Text></View>
+              <View style={{flex:.1}}><Text>Due Date</Text></View>
+            </View>  
+            <View style={styles.table}>{this.listAssignments()}</View>
             <View style={styles.assignments}>
               <Text>oi;jasdf</Text>
             </View>
@@ -123,10 +181,22 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   assignmentBox: {
-    backgroundColor: Colors.green,
-    margin: screenDimensions.screenWidth * 0.1,
+    backgroundColor: 'white',
+    margin: screenDimensions.screenWidth * 0.05,
     padding: 10,
-    width: screenDimensions.screenWidth * 0.8,
+    width: screenDimensions.screenWidth * 0.9,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  headerBox: {
+    backgroundColor: Colors.green,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    width: screenDimensions.screenWidth * 0.9,
+    height: 50,
+    left: -10,
+    top: -10,
+    padding: 10,
   },
   sectionTitles: {
     fontSize: 20,
@@ -148,6 +218,11 @@ const styles = StyleSheet.create({
   },
   zoomInput: {
     width: (screenDimensions.screenWidth * .9)/2,
+  },
+  tables: {
+    margin: screenDimensions.screenWidth*.4,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 });
   
