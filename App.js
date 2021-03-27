@@ -1,7 +1,15 @@
 import * as React from 'react';
 import { Text, View, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
-import {} from './ComponentLibrary'
+import {
+  screenWidth,
+  screenHeight,
+  Colors,
+  NormalText,
+  Title,
+  Button,
+  LibraryStyles,
+} from './ComponentLibrary';
 
 export default class App extends React.Component {
 
