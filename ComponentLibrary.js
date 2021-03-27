@@ -18,6 +18,11 @@ import Constants from 'expo-constants';
 //     ? webPreviewHeight
 //     : Dimensions.get('screen').height - Constants.statusBarHeight;
 
+export var screenDimensions = {
+    screenWidth: Dimensions.get('window').width,
+    screenHeight: Dimensions.get('window').height,
+}
+
 //THEME COLORS
 export const Colors = {
     pink: '#FFC9DD',

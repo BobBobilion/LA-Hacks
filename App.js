@@ -2,8 +2,7 @@ import * as React from 'react';
 import { Text, View, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
 import {
-  screenWidth,
-  screenHeight,
+  screenDimensions,
   Colors,
   NormalText,
   Title,
@@ -17,6 +16,23 @@ export default class App extends React.Component {
     super();
     
   }
+
+  //UPDATE WINDOW
+  updateWindow = () => {
+    screenDimensions.screenWidth = Dimensions.get('window').width;
+    screenDimensions.screenHeight = Dimensions.get('window').height;
+
+    this.setState({ something: true });
+  };
+
+  //TIMER FOR WINDOW DIMENSION CHECK
+  componentDidMount = () => {
+    this.counter = setInterval(() => {
+      this.updateWindow();
+    }, 500);
+  }
+
+
   render() {
     return (
       <View style={LibraryStyles.container}>
