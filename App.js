@@ -8,14 +8,13 @@ export default class App extends React.Component {
   constructor() {
     super();
   }
-
   render() {
     return (
       <View style={LibraryStyles.container}>
-        <View style={styles.assignmentBox}>
+        <View style={styles.sectionBox}>
         <Text style={styles.sectionTitles}>Zoom Links</Text>
         </View>
-        <View style={styles.assignmentBox}>
+        <View style={styles.sectionBox}>
         <Text style={styles.sectionTitles}>Assignments</Text>
           <View style={{ flexDirection: 'column' }}>
             <Button
@@ -46,24 +45,20 @@ export default class App extends React.Component {
       </View>
     );
   }
+}
 
 const styles = StyleSheet.create({
-  assignmentBox: {
-    backgroundColor : Colors.green,
-    margin : screenWidth*.05,
+  sectionBox: {
+    backgroundColor: '#94F0FF',
+    margin: screenWidth * 0.05,
     padding: 10,
-    width: screenWidth*.9,
+    width: screenWidth * 0.9,
   },
   sectionTitles: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  assignments: {
-    borderRadius: 3,
-    borderWidth: 2,
-    margin: screenWidth*.02,
-    backgroundColor: Colors.yellow,
-    padding: 3,
-  }
+  expandButton: {},
 });
+  
