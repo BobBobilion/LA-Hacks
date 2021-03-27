@@ -3,11 +3,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default class App {
-  render = () => {
+export default class App extends React.Component {
+  constructor(){
+    super()
+  }
+  render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>fasdfssd sdf
+        <Text>Open up App.js to start working on your app!</Text>
         <StatusBar style="auto" />
       </View>
     );
