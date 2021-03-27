@@ -69,6 +69,6 @@ const styles = StyleSheet.create({
     fontSize: screenWidth/2,
     textAlign: 'center',
   },
-  expandButton: {},
+
 });
   
