@@ -12,6 +12,11 @@ import {
 
 export default class App extends React.Component {
 
+  state = {
+    openClass: 0,
+    showGoing: 0,
+  }
+
   constructor() {
     super();
     
@@ -33,8 +38,7 @@ export default class App extends React.Component {
   }
 
   addClass = () => {
-    openClass = 1;
-    console.log(openClass);
+    this.setState({openClass: 1});
     this.setState({ dummy: true});
   }
   
@@ -52,9 +56,9 @@ export default class App extends React.Component {
           <Pressable style={styles.addition} onPress={() => this.addClass()}>+</Pressable> 
         </View>
         <View>
-        {showGoing == 1 ? <View><Text>OnGoing Meetings</Text><Text>{onGoingTime}{onGoingClass}</Text></View> : null}
+        {this.state.showGoing == 1 ? <View><Text>OnGoing Meetings</Text><Text>{onGoingTime}{onGoingClass}</Text></View> : null}
         </View>
-        {openClass == 1 ? 
+        {this.state.openClass == 1 ? 
         <View>
           <Text>Please Enter:</Text>
           <TextInput onPress={(nameClass) => this.className(nameClass)} style={styles.zoomInput} placeholder={"Class Name"}/>
