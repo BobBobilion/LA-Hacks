@@ -75,7 +75,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   assignmentBox: {
     backgroundColor: Colors.green,
-    margin: screenWidth * 0.05,
+    margin: screenDimensions.screenWidth * 0.05,
     padding: 10,
     width: screenDimensions.screenWidth * 0.9,
   },
