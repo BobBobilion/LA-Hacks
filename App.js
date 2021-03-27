@@ -73,8 +73,8 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  sectionBox: {
-    backgroundColor: '#94F0FF',
+  assignmentBox: {
+    backgroundColor: Colors.green,
     margin: screenWidth * 0.05,
     padding: 10,
     width: screenWidth * 0.9,
@@ -84,6 +84,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
-
+  assignments: {
+    borderRadius: 3,
+    borderWidth: 2,
+    margin: screenWidth * 0.02,
+    backgroundColor: Colors.darkGreen,
+    padding: 3,
+    borderColor: Colors.darkGreen,
+  },
 });
   
