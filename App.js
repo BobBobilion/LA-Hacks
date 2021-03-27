@@ -11,6 +11,8 @@ import {
 } from './ComponentLibrary';
 import { Data } from './Data';
 
+
+
 export default class App extends React.Component {
 
   constructor() {
@@ -38,11 +40,55 @@ export default class App extends React.Component {
   state = {
     openClass: 0,
     showGoing: 0,
-    date: '',
+    day: '',
     nameC: '',
     link: '',
     timeStart: '',
     timeEnd: '',
+
+    practiceSet: [
+      {
+        meetingLink: "link",
+        className: "Arthur Facredyn",
+        startTime: "9",
+        endTime: "12",
+      },
+      {
+        meetingLink: "link2",
+        className: "Arthur Facredyn2",
+        startTime: "9",
+        endTime: "12",
+      },
+      {
+        meetingLink: "link3",
+        className: "Arthur Facredyn3",
+        startTime: "12",
+        endTime: "13",
+      },
+      {
+        meetingLink: "link4",
+        className: "Arthur Facredyn4",
+        startTime: "8",
+        endTime: "10",
+      },
+      {
+        meetingLink: "link5",
+        className: "Arthur Facredyn5",
+        startTime: "9",
+        endTime: "12",
+      },
+      {
+        meetingLink: "link6",
+        className: "Arthur Facredyn6",
+        startTime: "7",
+        endTime: "9",
+      },
+      {
+        meetingLink: "link7",
+        className: "Arthur Facredyn7",
+        startTime: "14",
+        endTime: "16",
+      },],
   }
 
 
@@ -50,8 +96,6 @@ export default class App extends React.Component {
   updateWindow = () => {
     screenDimensions.screenWidth = Dimensions.get('window').width;
     screenDimensions.screenHeight = Dimensions.get('window').height;
-
-    this.setState({ something: true });
   };
 
   //TIMER FOR WINDOW DIMENSION CHECK
@@ -74,7 +118,7 @@ export default class App extends React.Component {
   }
 
   setDate = () => {
-    this.setState({date: new Date().getDate()});
+    this.setState({day: (new Date()).getDay()});
   }
 
   addClass = () => {
@@ -168,7 +212,7 @@ export default class App extends React.Component {
 
         
         <NormalText>
-          width: {screenDimensions.screenWidth} & height: {screenDimensions.screenHeight}
+          {this.state.day}
         </NormalText>
 
         <View style={styles.sectionBox}>
