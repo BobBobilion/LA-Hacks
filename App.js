@@ -177,7 +177,7 @@ export default class App extends React.Component {
               <View style={{flex:1}}><NormalText>Assignment Name:</NormalText></View>
               <View style={{flex:1}}><NormalText>Due Date:</NormalText></View>
             </View>  
-            <View style={styles.table}>{this.listAssignments()}</View>
+            <View>{this.listAssignments()}</View>
             <View style={styles.assignments}>
               <Text>oi;jasdf</Text>
             </View>
