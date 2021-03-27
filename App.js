@@ -82,7 +82,7 @@ export default class App extends React.Component {
 
         
         <NormalText>
-          width: {screenWidth} & height: {screenHeight}
+          width: {screenDimensions.screenWidth} & height: {screenDimensions.screenHeight}
         </NormalText>
 
         <View style={styles.sectionBox}>
@@ -103,9 +103,9 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   assignmentBox: {
     backgroundColor: Colors.green,
-    margin: screenWidth * 0.05,
+    margin: screenDimensions.screenWidth * 0.1,
     padding: 10,
-    width: screenWidth * 0.9,
+    width: screenDimensions.screenWidth * 0.8,
   },
   sectionTitles: {
     fontSize: 20,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   assignments: {
     borderRadius: 3,
     borderWidth: 2,
-    margin: screenWidth * 0.02,
+    margin: screenDimensions.screenWidth * 0.02,
     backgroundColor: Colors.darkGreen,
     padding: 3,
     borderColor: Colors.darkGreen,

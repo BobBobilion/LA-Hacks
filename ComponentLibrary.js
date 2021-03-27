@@ -65,8 +65,8 @@ export class Button extends React.Component {
 
 export const LibraryStyles = StyleSheet.create({
   container: {
-    width: screenWidth,
-    height: screenHeight + Constants.statusBarHeight,
+    width: screenDimensions.screenWidth,
+    height: screenDimensions.screenHeight + Constants.statusBarHeight,
     backgroundColor: Colors.dark,
     paddingTop: Constants.statusBarHeight,
   },
