@@ -23,13 +23,11 @@ const targetShrinkRatio = 0.9;
 const targetChangeDirectionChance = 0.07;
 const immuneTime = 30;
 const fps = 60;
-const lavender = '#A994FF';
-const darkLavender = '#878DE8';
-const blue = '#A0BFFF';
-const darkblue = '#87C1E8';
-const cyan = '#94F0FF';
-let screenWidth = Dimensions.get('window').width;
-let screenHeight = Dimensions.get('window').height;
+const pink = '#FFC9DD';
+const lightPink = '#B1C7FF';
+const blue = '#96B4FF';
+const yellow = '#FFE196';
+const green = '#A3FFAA';
 
 
 
@@ -78,9 +76,20 @@ export default class App extends React.Component {
   //RENDER FUNCTION
   render() {
     return (
-
     );
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  assignmentBox: {
+    backgroundColor : '#94F0FF',
+    margin : screenWidth*.05,
+    padding: 10,
+    width: screenWidth*.9,
+  },
+  sectionTitles: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  }
+});
