@@ -32,15 +32,40 @@ export default class App extends React.Component {
     }, 500);
   }
 
+  addClass = () => {
+    openClass = 1;
+    console.log(openClass);
+    this.setState({ dummy: true});
+  }
+  
+    className = () => {
+      
+  }
+
 
   render() {
     return (
       <View style={LibraryStyles.container}>
-        <View style={styles.sectionBox}>
-        <Text style={styles.sectionTitles}>Zoom Links</Text>
+        <View style={styles.assignmentBox}>
+        <View style={{flexDirection: "row"}}>
+          <Text style={styles.sectionTitles}>Meeting Links</Text>
+          <Pressable style={styles.addition} onPress={() => this.addClass()}>+</Pressable> 
         </View>
-        <View style={styles.sectionBox}>
-        <Text style={styles.sectionTitles}>Assignments</Text>
+        <View>
+        {showGoing == 1 ? <View><Text>OnGoing Meetings</Text><Text>{onGoingTime}{onGoingClass}</Text></View> : null}
+        </View>
+        {openClass == 1 ? 
+        <View>
+          <Text>Please Enter:</Text>
+          <TextInput onPress={(nameClass) => this.className(nameClass)} style={styles.zoomInput} placeholder={"Class Name"}/>
+          <TextInput onPress={(link) => this.className(link)} style={styles.zoomInput} placeholder={"Zoom Link"}/>
+          <TextInput onPress={(timeS) => this.className(timeS)} style={styles.zoomInput} placeholder={"Start Time"}/>
+          <TextInput onPress={(timeE) => this.className(timeE)} style={styles.zoomInput} placeholder={"End Time"}/>
+        </View> 
+        : null}
+        </View>
+        <View style={styles.assignmentBox}>
+          <Text style={styles.sectionTitles}>Assignments</Text>
           <View style={{ flexDirection: 'column' }}>
             <Button
               onPress={() => console.log('button 1 pressed')}
@@ -49,9 +74,12 @@ export default class App extends React.Component {
               onLongPress={() => console.log('Longpress')}>
               button 1
             </Button>
-            <View style={styles.assignments}><Text>oi;jasdf</Text></View>
+            <View style={styles.assignments}>
+              <Text>oi;jasdf</Text>
+            </View>
           </View>
         </View>
+
         
         <NormalText>
           width: {screenWidth} & height: {screenHeight}
@@ -92,5 +120,13 @@ const styles = StyleSheet.create({
     padding: 3,
     borderColor: Colors.darkGreen,
   },
+  addition: {
+    marginLeft: 10,
+    fontSize: 26,
+    fontWeight: 'bold',
+  },
+  zoomInput: {
+    width: (screenWidth * .9)/2,
+  }
 });
   
