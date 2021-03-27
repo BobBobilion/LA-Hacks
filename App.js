@@ -66,9 +66,9 @@ export default class App extends React.Component {
   listAssignments = () => {
     return this.state.assignments.map((assignment) => (
       <View style={styles.tables}>
-        <View style={{flex:.2}}><Text>{assignment.Class}:</Text></View>
-        <View style={{flex:.3}}><Text>{assignment.Assignment}</Text></View>
-        <View style={{flex:.1}}><Text>{assignment.Due}</Text></View>
+        <View style={{flex:1}}><Text>   -{assignment.Class}</Text></View>
+        <View style={{flex:1}}><Text>   {assignment.Assignment}</Text></View>
+        <View style={{flex:1}}><Text>   {assignment.Due}</Text></View>
       </View>  
     )) 
   }
@@ -133,9 +133,9 @@ export default class App extends React.Component {
               button 1
             </Button>
             <View style={styles.tables}>
-              <View style={{flex:.2}}><Text>Class</Text></View>
-              <View style={{flex:.3}}><Text>Assignment Name</Text></View>
-              <View style={{flex:.1}}><Text>Due Date</Text></View>
+            <View style={{flex:1}}><Text>Class:</Text></View>
+              <View style={{flex:1}}><Text>Assignment Name:</Text></View>
+              <View style={{flex:1}}><Text>Due Date:</Text></View>
             </View>  
             <View style={styles.table}>{this.listAssignments()}</View>
             <View style={styles.assignments}>
@@ -193,7 +193,8 @@ const styles = StyleSheet.create({
     width: (screenDimensions.screenWidth * .9)/2,
   },
   tables: {
-    margin: screenDimensions.screenWidth*.4,
+    marginHorizontal: (screenDimensions.screenWidth*.05)/4,
+    marginVertical: 1,
     flexDirection: 'row',
     justifyContent: 'space-around'
   }
