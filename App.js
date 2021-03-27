@@ -9,8 +9,31 @@ import {
   Button,
   LibraryStyles,
 } from './ComponentLibrary';
+import { Data } from './Data';
 
 export default class App extends React.Component {
+
+  constructor() {
+    super();
+    let assignments = [];
+
+    Data.forEach((element, index) => {
+      let className = element.ClassName;
+      let assignmentName = element.AssignmentName;
+      let dueDate = element.DueDate;
+      let assignment = {
+        Class: className,
+        Assignment: assignmentName,
+        Due: dueDate,
+      };
+      assignments.push(assignment);
+    });
+
+    this.state = {
+      assignments,
+    }
+    
+  }
 
   state = {
     openClass: 0,
@@ -22,10 +45,6 @@ export default class App extends React.Component {
     timeEnd: '',
   }
 
-  constructor() {
-    super();
-    
-  }
 
   //UPDATE WINDOW
   updateWindow = () => {
@@ -41,6 +60,17 @@ export default class App extends React.Component {
       this.updateWindow();
     }, 500);
     this.setDate();
+  }
+
+  //MAKES A TABLE FOR ASSIGNMENTS
+  listAssignments = () => {
+    return this.state.assignments.map((assignment) => (
+      <View style={styles.tables}>
+        <View style={{flex:.2}}><Text>{assignment.Class}:</Text></View>
+        <View style={{flex:.3}}><Text>{assignment.Assignment}</Text></View>
+        <View style={{flex:.1}}><Text>{assignment.Due}</Text></View>
+      </View>  
+    )) 
   }
 
   setDate = () => {
@@ -102,6 +132,12 @@ export default class App extends React.Component {
               onLongPress={() => console.log('Longpress')}>
               button 1
             </Button>
+            <View style={styles.tables}>
+              <View style={{flex:.2}}><Text>Class</Text></View>
+              <View style={{flex:.3}}><Text>Assignment Name</Text></View>
+              <View style={{flex:.1}}><Text>Due Date</Text></View>
+            </View>  
+            <View style={styles.table}>{this.listAssignments()}</View>
             <View style={styles.assignments}>
               <Text>oi;jasdf</Text>
             </View>
@@ -155,6 +191,11 @@ const styles = StyleSheet.create({
   },
   zoomInput: {
     width: (screenDimensions.screenWidth * .9)/2,
+  },
+  tables: {
+    margin: screenDimensions.screenWidth*.4,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 });
   
