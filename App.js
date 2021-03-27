@@ -55,9 +55,10 @@ const styles = StyleSheet.create({
     padding: 10,
     width: screenWidth * 0.9,
   },
-  playText: {
-    fontSize: screenWidth/2,
-    textAlign: 'center',
+  sectionTitles: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
 
 });
