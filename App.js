@@ -16,6 +16,10 @@ export default class App extends React.Component {
     openClass: 0,
     showGoing: 0,
     date: '',
+    nameC: '',
+    link: '',
+    timeStart: '',
+    timeEnd: '',
   }
 
   constructor() {
@@ -52,6 +56,20 @@ export default class App extends React.Component {
       
   }
 
+    linkFunc = () => {
+
+  }
+
+    timeSFunc = () => {
+
+  }
+
+    timeEFunc = () => {
+
+  }
+
+
+
 
   render() {
     return (
@@ -67,10 +85,10 @@ export default class App extends React.Component {
         {this.state.openClass == 1 ? 
         <View>
           <Text>Please Enter:</Text>
-          <TextInput onPress={(nameClass) => this.className(nameClass)} style={styles.zoomInput} placeholder={"Class Name"}/>
-          <TextInput onPress={(link) => this.className(link)} style={styles.zoomInput} placeholder={"Zoom Link"}/>
-          <TextInput onPress={(timeS) => this.className(timeS)} style={styles.zoomInput} placeholder={"Start Time"}/>
-          <TextInput onPress={(timeE) => this.className(timeE)} style={styles.zoomInput} placeholder={"End Time"}/>
+          <TextInput onPress={(nameClass) => this.className(nameClass)} style={styles.zoomInput} value={this.state.nameC} placeholder={"Class Name"}/>
+          <TextInput onPress={(link) => this.linkFunc(linkInput)} style={styles.zoomInput} value={this.state.link} placeholder={"Zoom Link"}/>
+          <TextInput onPress={(timeS) => this.timeSFunc(timeS)} style={styles.zoomInput} value={this.state.timeStart} placeholder={"Start Time"}/>
+          <TextInput onPress={(timeE) => this.timeEFunc(timeE)} style={styles.zoomInput} value={this.state.timeEnd} placeholder={"End Time"}/>
         </View> 
         : null}
         </View>
