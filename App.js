@@ -207,9 +207,35 @@ export default class App extends React.Component {
         {this.state.counter > timeLimit ? (<View/>
         ) : null}
         <NormalText>score: {player.score}</NormalText>
+
+        <View style={styles.assignmentBox}>
+        <Text style={styles.sectionTitles}>Assignments</Text>
+        
+          <View style={{ flexDirection: 'row' }}>
+            <Button
+              onPress={() => console.log('button 1 pressed')}
+              onPressIn={() => console.log('pressIn')}
+              onPressOut={() => console.log('pressOut')}
+              onLongPress={() => console.log('Longpress')}>
+              button 1
+            </Button>
+          </View>
+        </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  assignmentBox: {
+    backgroundColor : '#94F0FF',
+    margin : screenWidth*.05,
+    padding: 10,
+    width: screenWidth*.9,
+  },
+  sectionTitles: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  }
+});
