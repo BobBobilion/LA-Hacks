@@ -8,6 +8,15 @@ import {
   Pressable,
 } from 'react-native';
 import Constants from 'expo-constants';
+import {
+  screenWidth,
+  screenHeight,
+  Colors,
+  NormalText,
+  Title,
+  Button,
+  LibraryStyles,
+} from './ComponentLibrary';
 
 // const webPreviewWidth;
 // const webPreviewHeight;
