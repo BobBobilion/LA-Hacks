@@ -68,8 +68,8 @@ export default class App extends React.Component {
     return this.state.assignments.map((assignment) => (
       <View style={styles.tables}>
         <View style={{flex:1}}><Text>   -{assignment.Class}</Text></View>
-        <View style={{flex:1}}><Text>   {assignment.Assignment}</Text></View>
-        <View style={{flex:1}}><Text>   {assignment.Due}</Text></View>
+        <View style={{flex:1}}><Text>   -{assignment.Assignment}</Text></View>
+        <View style={{flex:1}}><Text>   -{assignment.Due}</Text></View>
       </View>  
     )) 
   }
