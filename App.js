@@ -60,7 +60,7 @@ export default class App extends React.Component {
           meetingLink: "link",
           className: "Arthur Facredyn",
           startHour: 9,
-          startMin: 09,
+          startMin: "09",
           endTime: 12, 
           endMin: 0,
         },
@@ -203,16 +203,16 @@ export default class App extends React.Component {
 
       this.setState({meetingForToday: upcoming})
 
-      // let ongoing = this.state.sub.filter((element, index) => {
-      //   //need to add something for the start time hours and minutes
-      //   if (element.startHour > this.state.hour && element.startMin > this.state.minutes){
-      //     return element;
-      //   } else if (element.startHour == this.state.hour && element.startMin > this.state.minutes){
-      //     return element;
-      //   }
-      // });
+       let ongoing = this.state.sub.filter((element, index) => {
+        //need to add something for the start time hours and minutes
+        if (element.startHour > this.state.hour && element.startMin > this.state.minutes){
+          return element;
+        } else if (element.startHour == this.state.hour && element.startMin > this.state.minutes){
+          return element;
+        }
+      });
 
-      // this.setState({ongoingMeeting: ongoing});
+      this.setState({ongoingMeeting: ongoing});
 
       console.log(this.state.sub);
       console.log(this.state.ongoingMeeting);
