@@ -11,7 +11,7 @@ import {
 } from './ComponentLibrary';
 import App from './App';
 
-export default class App extends React.Component {
+export default class IntroPage extends React.Component {
     //create state here
     state = {
       canvUser: '',
@@ -19,6 +19,7 @@ export default class App extends React.Component {
       aeUser: '',
       aePass: '',
       canPass: 'Continue',
+      page: 'IntroPage',
     };
   
     //the values in the parenthesis are the input.
@@ -40,8 +41,9 @@ export default class App extends React.Component {
     }
     
     nextPage = () => {
+        this.setState({page: 'App'})
         if(this.state.aePass!=='' && this.state.aeUser!=='' && this.state.canvPass!=='' && this.state.canvUser!==''){
-            this.props.goToPage('App');
+            return <App goToPage={(page) => this.setState({ page })} />;
         } else{
             this.setState({canPass: 'Please Fill out All Fields'})
         }
