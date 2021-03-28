@@ -219,7 +219,7 @@ export default class App extends React.Component {
 
        let ongoing = this.state.sub.filter((element, index) => {
         //need to add something for the start time hours and minutes
-        if ((element.startHour < this.state.hour || (element.startHour == this.state.hour && element.startMin < this.state.minutes)) && (element.endHour > this.state.hour || (element.endHour == this.state.hour && element.endMin > this.state.minutes))){
+        if ((element.startHour < this.state.hour || (element.startHour <= this.state.hour && element.startMin < this.state.minutes)) && (element.endHour > this.state.hour || (element.endHour >= this.state.hour && element.endMin > this.state.minutes))){
            return element;
         }
       });
