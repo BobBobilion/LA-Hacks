@@ -141,7 +141,6 @@ export default class App extends React.Component {
 
   addClass = () => {
     this.setState({openClass: 1});
-    this.setState({ dummy: true});
   }
   
   addClassFinish = () => {
