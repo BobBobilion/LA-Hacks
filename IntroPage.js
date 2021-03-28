@@ -99,7 +99,7 @@ export default class IntroPage extends React.Component {
                 style={styles.classScroll}
                 data={this.state.classes}
                 renderItem={(aClass) => (
-                  <NormalText>{aClass.item}</NormalText>
+                  <NormalText>{aClass.className}</NormalText>
                 )}
               />
             </View>
