@@ -31,11 +31,14 @@ export default class IntroPage extends React.Component {
       if(this.state.newClass!=='' && this.state.newLink!=='' && this.state.newTime!==''){
         this.setState({canAdd: 'Add'});
         let classes = this.state.classes;
-        let newClass = this.state.newClass;
-        let newLink = this.state.newLink;
-        let aClassInfo = {className: this.state.newClass, link: this.state.newLink, startTime: this.state.newTime};
+        let zoomLink = this.state.newLink;
+        let time = this.state.newTime;
+        let name = this.state.newClass;
+        let aClassInfo = {aName: name, link: zoomLink, startTime: time};
         classes.push(aClassInfo);
-        this.setState({classes, newClass, newLink, newTime: '' });
+        this.setState({newTime: '' });
+        this.setState({newClass: ''});
+        this.setState({newLink: '' });
       }else{
         this.setState({canAdd: 'Missing Info'})
       }
@@ -133,6 +136,7 @@ export default class IntroPage extends React.Component {
                 onPress={() => this.addClass()}>
                 <NormalText>{this.state.canAdd}</NormalText>
               </Pressable>
+              
             </View>
 
 
