@@ -19,15 +19,33 @@ export default class IntroPage extends React.Component {
       aeUser: '',
       aePass: '',
       canPass: 'Continue',
+      canAdd: 'Add',
       page: 'IntroPage',
       newClass: '',
+      newLink: '',
+      newTime: '',
+      newEndTime: '',
       classes: [],
     };
 
     addClass = () => {
-      let classes = [this.state.classes];
-      classes.push(this.state.newClass);
-      this.setState({ classes, newName: '' });
+      if(this.state.newClass!=='' && this.state.newLink!=='' && this.state.newTime!=='' && this.state.newEndTime!==''){
+        this.setState({canAdd: 'Add'});
+        let classes = this.state.classes;
+        let zoomLink = this.state.newLink;
+        let time = this.state.newTime;
+        let name = this.state.newClass;
+        let moreTime = this.state.newEndTime;
+        let aClassInfo = {aName: name, link: zoomLink, startTime: time, newEndTime: moreTime};
+        classes.push(aClassInfo);
+        this.setState({newTime: '' });
+        this.setState({newClass: ''});
+        this.setState({newLink: '' });
+        this.setState({newEndTime: ''});
+        console.log(this.state.classes);
+      }else{
+        this.setState({canAdd: 'Missing Info'})
+      }
     };
   
     //the values in the parenthesis are the input.
@@ -87,41 +105,48 @@ export default class IntroPage extends React.Component {
               <FlatList
                 style={styles.classScroll}
                 data={this.state.classes}
-                renderItem={(aClass) => (
-                  <NormalText>{aClass.item}</NormalText>
+                renderItem={(classes) => (
+                  <Text>{classes.className}</Text>
                 )}
               />
             </View>
   
             <View style={styles.row}>
               <View>
-                <TextInput
-                  onChangeText={(aeUser) => this.setState({ aeUser })}
-                  style={styles.infoInput}
-                  value={this.state.aeUser}
-                  placeholder={'Aeries Username/Email'}
-                />
-      
-                <TextInput
-                  onChangeText={(aePass) => this.setState({ aePass })}
-                  style={styles.infoInput}
-                  value={this.state.aePass}
-                  placeholder={'Aeries Password'}
-                />
+
                 <TextInput
                   placeholder={'Class Name'}
                   style={styles.infoInput}
-                  value={this.state.newName}
-                  onChangeText={(newName) => this.setState({ newName })}
+                  value={this.state.newClass}
+                  onChangeText={(newClass) => this.setState({ newClass })}
+                />
+                <TextInput
+                  onChangeText={(newEndTime) => this.setState({ newEndTime })}
+                  style={styles.infoInput}
+                  value={this.state.newEndTime}
+                  placeholder={'What is the end time?'}
+                />
+                <TextInput
+                  onChangeText={(newTime) => this.setState({ newTime })}
+                  style={styles.infoInput}
+                  value={this.state.newTime}
+                  placeholder={'What is the start time?'}
+                />
+      
+                <TextInput
+                  onChangeText={(newLink) => this.setState({ newLink })}
+                  style={styles.infoInput}
+                  value={this.state.newLink}
+                  placeholder={'What is the meeting link?'}
                 />
               </View>
               <Pressable
                 style={styles.addButton}
                 onPress={() => this.addClass()}>
-                <NormalText>Add</NormalText>
+                <NormalText>{this.state.canAdd}</NormalText>
               </Pressable>
+              
             </View>
-
 
 
 
@@ -214,8 +239,8 @@ export default class IntroPage extends React.Component {
       alignContent: 'center',
     },
     addButton: {
-      width: '5%',
-      height: '50%',
+      width: 50,
+      height: '96%',
       margin: 3,
       borderColor: Colors.cyan,
       borderWidth: 2,
