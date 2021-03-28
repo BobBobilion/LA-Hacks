@@ -113,19 +113,19 @@ export default class App extends React.Component {
 
   todaysMeetings = () => {
     let sub = [];
-      if (day == 1){
+      if (this.state.day == 1){
         sub = practiceSet[0];
-      } else if (day == 2){
+      } else if (this.state.day == 2){
         sub = practiceSet[1];
-      } else if (day == 3){
+      } else if (this.state.day == 3){
         sub = practiceSet[2];
-      } else if (day == 4){
+      } else if (this.state.day == 4){
         sub = practiceSet[3];
-      } else if (day == 5){
+      } else if (this.state.day == 5){
         sub = practiceSet[4];
-      }  else if (day == 0){
+      }  else if (this.state.day == 0){
         sub = practiceSet[5];
-      } else if (day == 6){
+      } else if (this.state.day == 6){
         sub = practiceSet[6];
       } 
 
