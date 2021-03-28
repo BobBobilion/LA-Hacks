@@ -136,7 +136,6 @@ export default class App extends React.Component {
 
         openAssignment: 0,
         openClass: 0,
-        showGoing: 1,
         day: 0,
         assignClass: '',
         assignName: '',
@@ -152,6 +151,7 @@ export default class App extends React.Component {
         meetingForToday: [],
         ongoingMeeting: [],
         sub: '',
+        showUpcoming: 0,
     }
     
   }
@@ -201,16 +201,22 @@ export default class App extends React.Component {
         }
       });
 
+      if (upcoming.length > 0){
+        this.setState({showUpcoming: 1});
+      }
+
       this.setState({meetingForToday: upcoming})
 
        let ongoing = this.state.sub.filter((element, index) => {
          //need to add something for the start time hours and minutes
-         if (element.startHour > this.state.hour && element.startMin > this.state.minutes){
+         if ((element.startHour < this.state.hour || (element.startHour == this.state.hour && element.startMin < this.state.minutes)) && (element.endHour > this.state.hour || (element.endHour == this.state.hour && element.endMin > this.state.minutes))){
            return element;
-         } else if (element.startHour == this.state.hour && element.startMin > this.state.minutes){
-           return element;
-         }
+         } 
        });
+      
+       if (ongoing.length > 0){
+        this.setState({showGoing: 1});
+       }
 
        this.setState({ongoingMeeting: ongoing});
 
@@ -220,20 +226,16 @@ export default class App extends React.Component {
 
   }
 
-  listOngoingMeetings = () => {
-    if (this.state.ongoingMeeting.length == 0){
-      //change a variable to say: No meetings for today
-      null;
-    } else {
-      this.setState.showGoing = 1; 
-      return this.state.ongoingMeeting.map((element, index) => {
+  listOngoingMeetings = () => { 
+      let ongoingMeetings = this.state.ongoingMeeting;
+      return ongoingMeetings.map((element, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>{this.state.meetingForToday[index].startHour}:{element.startMin}</NormalText></View>
-        <View style={{flex:1}}><NormalText>      {this.state.meetingForToday[index].className}</NormalText></View>
-        <View style={{flex:1}}><NormalText>      {this.state.meetingForToday[index].meetingLink}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {element.startHour}:{element.startMin}</NormalText></View>
+        <View style={{flex:1}}><NormalText>{element.className}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {element.meetingLink}</NormalText></View>
       </View> 
-      })
-    }
+      ))
+    this.setState({dummy: true});
   }
 
   putOutMeetings = () => {
@@ -241,7 +243,7 @@ export default class App extends React.Component {
     return upcomingMeetings.map((meeting, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
         <View style={{flex:1}}><NormalText>      {meeting.startHour}:{meeting.startMin}</NormalText></View>
-        <View style={{flex:1}}><NormalText>      {meeting.className}</NormalText></View>
+        <View style={{flex:1}}><NormalText>{meeting.className}</NormalText></View>
         <View style={{flex:1}}><NormalText>      {meeting.meetingLink}</NormalText></View>
       </View>  
     )) 
@@ -334,10 +336,27 @@ export default class App extends React.Component {
           </View>
         <View>
         {this.state.showGoing == 1 ? 
-          <View><NormalText>Ongoing Meetings</NormalText>{this.listOngoingMeetings()}</View> 
+          <View>
+            <NormalText>Ongoing Meetings</NormalText>
+            <View style={styles.tables}>
+              <View style={{flex:1}}><NormalText>      Start Time:</NormalText></View>
+              <View style={{flex:1}}><NormalText>Class Name:</NormalText></View>
+              <View style={{flex:1}}><NormalText>      Link:</NormalText></View>
+            </View>
+            {this.listOngoingMeetings()}
+          </View> 
           : <NormalText>No Ongoing Meetings!</NormalText>}
-          <NormalText>Upcoming Meetings</NormalText>
-          {this.putOutMeetings()}
+          {this.state.showUpcoming == 1 ? 
+          <View>
+            <NormalText>Upcoming Meetings</NormalText>
+            <View style={styles.tables}>
+              <View style={{flex:1}}><NormalText>      Start Time:</NormalText></View>
+              <View style={{flex:1}}><NormalText>Class Name:</NormalText></View>
+              <View style={{flex:1}}><NormalText>      Link:</NormalText></View>
+            </View>
+            {this.putOutMeetings()}
+          </View> 
+          : <NormalText>No Upcoming Meetings for Today!</NormalText>}
         </View>
         {this.state.openClass == 1 ? 
         <View>
