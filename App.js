@@ -41,7 +41,7 @@ export default class App extends React.Component {
     openClass: 0,
     showGoing: 0,
     day: '',
-    nameC: '',
+    nameClass: '',
     link: '',
     timeStart: '',
     timeEnd: '',
@@ -104,6 +104,12 @@ export default class App extends React.Component {
       this.updateWindow();
     }, 500);
     this.setDate();
+  }
+
+  grabMeetings = () => {
+    return this.state.practiceSet.map(element, index) => {
+      
+    }
   }
 
   //MAKES A TABLE FOR ASSIGNMENTS
