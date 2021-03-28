@@ -1,5 +1,5 @@
 
-export default async function getGrades(username, password){
+export default function GetGrades(username, password){
 
     const cheerio = require('cheerio');
     const $ = cheerio.load(Grade)

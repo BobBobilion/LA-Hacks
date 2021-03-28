@@ -1,4 +1,4 @@
-export default async function getCanvasAssignments(username="", password=""){
+export default function getCanvasAssignments(username="", password=""){
     const cheerio = require('cheerio');
     const $ = cheerio.load(Canvas)
   
