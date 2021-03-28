@@ -14,30 +14,23 @@ import App from './App';
 export default class IntroPage extends React.Component {
     //create state here
     state = {
-      canvUser: null,
-      canvPass: null,
-      aeUser: null,
-      aePass: null,
+      canvUser: '',
+      canvPass: '',
+      aeUser: '',
+      aePass: '',
       canPass: 'Continue',
       page: 'IntroPage',
     };
   
     //the values in the parenthesis are the input.
-  
-    saveCanvas = () => {
-      this.setState((prevState) => ({
-        canvUser: prevState.canvUser,
-        canvPass: prevState.canvPass,
-      }));
-      console.log(this.state.canvUser + " " + this.state.canvPass)
-    };
-  
-    saveAeries = () => {
-      this.setState((prevState) => ({
-        aeUser: prevState.aeUser,
-        aePass: prevState.aePass,
-      }));
-      console.log(this.state.aeUser + " " + this.state.aePass)
+
+
+    nextPage = () => {
+      if(this.state.canvPass!=='' && this.state.canvUser!=='' && this.state.aePass!=='' && this.state.aeUser!==''){
+        this.props.goToPage('Main');
+      }else{
+        this.setState({canPass: 'Please Save/Enter All Fields First'})
+      }
     }
     
     
@@ -65,9 +58,7 @@ export default class IntroPage extends React.Component {
               placeholder={'Canvas Password'}
             />
   
-            <Pressable onPress={() => this.saveCanvas()} style={styles.button}>
-              <Text style={styles.buttonText}>Save Canvas Information</Text>
-            </Pressable>
+            
   
             <Text>{'\n'}</Text>
   
@@ -85,11 +76,13 @@ export default class IntroPage extends React.Component {
               placeholder={'Aeries Password'}
             />
   
-            <Pressable onPress={() => this.saveAeries()} style={styles.button}>
-              <Text style={styles.buttonText}>Save Aeries Information</Text>
-            </Pressable>
 
-            <Pressable onPress={() => this.props.goToPage('Main')}>
+
+            
+
+
+
+            <Pressable onPress={() => this.nextPage()} style={styles.continueButton}>
               <Text>{this.state.canPass}</Text>
             </Pressable>
           </View>
@@ -134,6 +127,18 @@ export default class IntroPage extends React.Component {
       backgroundColor: Colors.forestGreen,
       justifyContent: 'center',
       borderRadius: 3,
+    },
+    continueButton: {
+      padding: 7,
+      margin: 7,
+      width: (screenDimensions.screenWidth)*.25,
+      alignItems: 'center',
+      alignSelf: 'center',
+      backgroundColor: Colors.cyan,
+      justifyContent: 'center',
+      borderRadius: 3,
+      borderColor: 'white',
+      borderWidth: 3,
     },
     infoInput: {
       width: (screenDimensions.screenWidth)*.8,

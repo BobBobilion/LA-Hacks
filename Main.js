@@ -456,6 +456,10 @@ export default class App extends React.Component {
           Width: {screenDimensions.screenWidth}
           Height: {screenDimensions.screenHeight}
         </NormalText>
+
+        <Pressable onPress={() => this.props.goToPage('IntroPage')}>
+          <Text> Go to the Intro Page</Text>
+        </Pressable>
       </View>
     );
   }
