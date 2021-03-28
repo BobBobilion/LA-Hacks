@@ -112,17 +112,18 @@ export default class IntroPage extends React.Component {
                   value={this.state.newClass}
                   onChangeText={(newClass) => this.setState({ newClass })}
                 />
-                <TextInput
-                  onChangeText={(newEndTime) => this.setState({ newEndTime })}
-                  style={styles.infoInput}
-                  value={this.state.newEndTime}
-                  placeholder={'What is the end time?'}
-                />
+                
                 <TextInput
                   onChangeText={(newTime) => this.setState({ newTime })}
                   style={styles.infoInput}
                   value={this.state.newTime}
                   placeholder={'What is the start time?'}
+                />
+                <TextInput
+                  onChangeText={(newEndTime) => this.setState({ newEndTime })}
+                  style={styles.infoInput}
+                  value={this.state.newEndTime}
+                  placeholder={'What is the end time?'}
                 />
       
                 <TextInput
