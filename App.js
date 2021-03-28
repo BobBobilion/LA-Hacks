@@ -197,9 +197,6 @@ export default class App extends React.Component {
               button 1
             </Button>
             
-            <View style={styles.assignments}>
-              <Text>oi;jasdf</Text>
-            </View>
           </View>
         </View>
 
