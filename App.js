@@ -32,57 +32,104 @@ export default class App extends React.Component {
     });
 
     this.state = {
-      assignments,practiceSet: {
+      assignments,
+      practiceSet: {
         mon:[{
           meetingLink: "link",
           className: "Arthur Facredyn",
-          startTime: "9",
-          endTime: "12",
+          startHour: 9,
+          startMin: 0,
+          endTime: 12,
+          endMin: 0,
         },
         {
           meetingLink: "link2",
           className: "Arthur Facredyn2",
-          startTime: "9",
-          endTime: "12",
+          startHour: 9,
+          startMin: 0,
+          endTime: 12,
+          endMin: 0,
+        }],
+        sun:[{
+          meetingLink: "link",
+          className: "Arthur Facredyn",
+          startHour: 9,
+          startMin: 0,
+          endTime: 12,
+          endMin: 0,
+        },
+        {
+          meetingLink: "link2",
+          className: "Arthur Facredyn2",
+          startHour: 9,
+          startMin: 0,
+          endTime: 12,
+          endMin: 0,
+        }],
+        sat:[{
+          meetingLink: "link",
+          className: "Arthur Facredyn",
+          startHour: 23,
+          startMin: 0,
+          endHour: 23,
+          endMin: 55
+        },
+        {
+          meetingLink: "link2",
+          className: "Arthur Facredyn2",
+          startHour: 9,
+          startMin: 0,
+          endTime: 12,
+          endMin: 0,
         }],
   
         tues:[{
           meetingLink: "link3",
           className: "Arthur Facredyn3",
-          startTime: "12",
-          endTime: "13",
+          startHour: 12,
+          startMin: 0,
+          endTime: 13,
+          endMin: 0,
         }],
   
         wed:[{
           meetingLink: "link4",
           className: "Arthur Facredyn4",
-          startTime: "8",
-          endTime: "10",
+          startHour: 8,
+          startMin: 0,
+          endTime: 10,
+          endMin: 0,
         }],
   
         thurs:[{
           meetingLink: "link5",
           className: "Arthur Facredyn5",
-          startTime: "9",
-          endTime: "12",
+          startHour: 9,
+          startMin: 0,
+          endTime: 12,
+          endMin: 0,
         },
         {
           meetingLink: "link6",
           className: "Arthur Facredyn6",
-          startTime: "7",
-          endTime: "9",
+          startHour: "7",
+          startMin: 0,
+          endHour: 9,
+          endMin: 0,
         }],
   
         fri:[{
           meetingLink: "link7",
           className: "Arthur Facredyn7",
-          startTime: "14",
-          endTime: "16",
+          startHour: "14",
+          startMin: 0,
+          endHour: 16,
+          endMin: 0,
         },]},
 
 
         openClass: 0,
-        showGoing: 0,
+        showGoing: 1,
         day: 0,
         nameClass: '',
         link: '',
@@ -90,6 +137,9 @@ export default class App extends React.Component {
         timeEnd: '',
         hour: 0,
         minutes: 0,
+        meetingForToday: [],
+        ongoingMeeting: [],
+        sub: '',
     }
     
   }
@@ -106,45 +156,82 @@ export default class App extends React.Component {
   componentDidMount = () => {
     this.counter = setInterval(() => {
       this.updateWindow();
+      this.setDate();
+      this.todaysMeetings();
     }, 500);
-    this.setDate();
-    this.todaysMeetings();
+
   }
 
   todaysMeetings = () => {
-    let sub = [];
-      if (this.state.day == 1){
-        sub = practiceSet[0];
+      if (this.state.day == 0){
+        this.setState({sub: this.state.practiceSet.sun});
+      } else if (this.state.day == 1){
+        this.setState({sub: this.state.practiceSet.mon});
       } else if (this.state.day == 2){
-        sub = practiceSet[1];
+        this.setState({sub: this.state.practiceSet.tues});
       } else if (this.state.day == 3){
-        sub = practiceSet[2];
+        this.setState({sub: this.state.practiceSet.wed});
       } else if (this.state.day == 4){
-        sub = practiceSet[3];
-      } else if (this.state.day == 5){
-        sub = practiceSet[4];
-      }  else if (this.state.day == 0){
-        sub = practiceSet[5];
+        this.setState({sub: this.state.practiceSet.thurs});
+      }  else if (this.state.day == 5){
+        this.setState({sub: this.state.practiceSet.fri});
       } else if (this.state.day == 6){
-        sub = practiceSet[6];
+        this.setState({sub: this.state.practiceSet.sat});
       } 
 
-      for (var element in meetingsForToday){
-        
-      }
+      let upcoming = this.state.sub.filter((element, index) => {
+        //need to add something for the start time hours and minutes
+        if (element.startHour > this.state.hour){
+          return element;
+        } else if (element.startHour == this.state.hour && element.startMin > this.state.minutes){
+          return element;
+        }
+      });
+
+      this.setState({meetingForToday: upcoming})
+
+      // let ongoing = this.state.sub.filter((element, index) => {
+      //   //need to add something for the start time hours and minutes
+      //   if (element.startHour > this.state.hour && element.startMin > this.state.minutes){
+      //     return element;
+      //   } else if (element.startHour == this.state.hour && element.startMin > this.state.minutes){
+      //     return element;
+      //   }
+      // });
+
+      // this.setState({ongoingMeeting: ongoing});
+
+      console.log(this.state.sub);
+      console.log(this.state.ongoingMeeting);
+      this.setState({dummy: true});
 
   }
 
-  putOutMeetings = () => {
-    if (meetingForToday.length == 0){
+  listOngoingMeetings = () => {
+    if (this.state.meetingForToday.length == 0){
       //change a variable to say: No meetings for today
-    } else {
-      // return this.state.meetingForToday.map(element, index) => {
-      //   // <View>
 
-      //   // </View>
-      // }
+    } else {
+      this.setState.showGoing = 1; 
+      return this.state.meetingForToday.map((element, index) => {
+      <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
+        <View style={{flex:1}}><NormalText>{this.state.meetingForToday[index].startHour}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {this.state.meetingForToday[index].className}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {this.state.meetingForToday[index].meetingLink}</NormalText></View>
+      </View> 
+      })
     }
+  }
+
+  putOutMeetings = () => {
+    let upcomingMeetings = this.state.meetingForToday;
+    return upcomingMeetings.map((meeting, index) => (
+      <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
+        <View style={{flex:1}}><NormalText>      {meeting.className}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {meeting.className}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {meeting.meetingLink}</NormalText></View>
+      </View>  
+    )) 
   }
 
   //MAKES A TABLE FOR ASSIGNMENTS
@@ -187,7 +274,11 @@ export default class App extends React.Component {
             <Pressable style={styles.addition} onPress={() => this.addClass()}>+</Pressable> 
           </View>
         <View>
-        {this.state.showGoing == 1 ? <View><Text>OnGoing Meetings</Text><Text>{onGoingTime}{onGoingClass}</Text></View> : null}
+        {this.state.showGoing == 1 ? 
+          <View><NormalText>Ongoing Meetings</NormalText>{this.listOngoingMeetings()}</View> 
+          : <NormalText>No Ongoing Meetings!</NormalText>}
+          <NormalText>Upcoming Meetings</NormalText>
+          {this.putOutMeetings()}
         </View>
         {this.state.openClass == 1 ? 
         <View>
@@ -236,8 +327,9 @@ export default class App extends React.Component {
 
         
         <NormalText>
-          {this.state.practiceSet.mon[0].meetingLink}
-          {(new Date()).getMilliseconds()}
+          Min: {this.state.minutes}
+          Hours: {this.state.hour}
+          {/* upcoming: {this.state.meetingForToday[0].meetingLink} */}
         </NormalText>
 
         <View style={styles.sectionBox}>
