@@ -33,68 +33,67 @@ export default class App extends React.Component {
     });
 
     this.state = {
-      assignments,
+      assignments,practiceSet: {
+        mon:[{
+          meetingLink: "link",
+          className: "Arthur Facredyn",
+          startTime: "9",
+          endTime: "12",
+        },
+        {
+          meetingLink: "link2",
+          className: "Arthur Facredyn2",
+          startTime: "9",
+          endTime: "12",
+        }],
+  
+        tues:[{
+          meetingLink: "link3",
+          className: "Arthur Facredyn3",
+          startTime: "12",
+          endTime: "13",
+        }],
+  
+        wed:[{
+          meetingLink: "link4",
+          className: "Arthur Facredyn4",
+          startTime: "8",
+          endTime: "10",
+        }],
+  
+        thurs:[{
+          meetingLink: "link5",
+          className: "Arthur Facredyn5",
+          startTime: "9",
+          endTime: "12",
+        },
+        {
+          meetingLink: "link6",
+          className: "Arthur Facredyn6",
+          startTime: "7",
+          endTime: "9",
+        }],
+  
+        fri:[{
+          meetingLink: "link7",
+          className: "Arthur Facredyn7",
+          startTime: "14",
+          endTime: "16",
+        },]},
+
+
+        openClass: 0,
+        showGoing: 0,
+        day: '',
+        nameClass: '',
+        link: '',
+        timeStart: '',
+        timeEnd: '',
+
     }
     
   }
 
-  state = {
-    openClass: 0,
-    showGoing: 0,
-    day: '',
-    nameClass: '',
-    link: '',
-    timeStart: '',
-    timeEnd: '',
-
-    practiceSet: [
-      {mon:[{
-        meetingLink: "link",
-        className: "Arthur Facredyn",
-        startTime: "9",
-        endTime: "12",
-      },
-      {
-        meetingLink: "link2",
-        className: "Arthur Facredyn2",
-        startTime: "9",
-        endTime: "12",
-      }]},
-
-      {tues:[{
-        meetingLink: "link3",
-        className: "Arthur Facredyn3",
-        startTime: "12",
-        endTime: "13",
-      }]},
-
-      {wed:[{
-        meetingLink: "link4",
-        className: "Arthur Facredyn4",
-        startTime: "8",
-        endTime: "10",
-      }]},
-
-      {thurs:[{
-        meetingLink: "link5",
-        className: "Arthur Facredyn5",
-        startTime: "9",
-        endTime: "12",
-      },
-      {
-        meetingLink: "link6",
-        className: "Arthur Facredyn6",
-        startTime: "7",
-        endTime: "9",
-      }]},
-
-      {fri:[{
-        meetingLink: "link7",
-        className: "Arthur Facredyn7",
-        startTime: "14",
-        endTime: "16",
-      },]}],
-  }
 
 
   //UPDATE WINDOW
@@ -207,7 +206,8 @@ export default class App extends React.Component {
 
         
         <NormalText>
-          {this.state.day}
+          {this.state.practiceSet.mon[0].meetingLink}
+          {(new Date()).getMilliseconds()}
         </NormalText>
 
         <View style={styles.sectionBox}>
