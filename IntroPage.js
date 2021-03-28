@@ -19,15 +19,29 @@ export default class IntroPage extends React.Component {
       aeUser: '',
       aePass: '',
       canPass: 'Continue',
+      canAdd: 'Add',
       page: 'IntroPage',
       newClass: '',
+      newLink: '',
+      newTime: '',
       classes: [],
     };
 
     addClass = () => {
-      let classes = [this.state.classes];
-      classes.push(this.state.newClass);
-      this.setState({ classes, newName: '' });
+      if(this.state.newClass!=='' && this.state.newLink!=='' && this.state.newTime!==''){
+        this.setState({canAdd: 'Add'});
+        let classes = this.state.classes;
+        let zoomLink = this.state.newLink;
+        let time = this.state.newTime;
+        let name = this.state.newClass;
+        let aClassInfo = {aName: name, link: zoomLink, startTime: time};
+        classes.push(aClassInfo);
+        this.setState({newTime: '' });
+        this.setState({newClass: ''});
+        this.setState({newLink: '' });
+      }else{
+        this.setState({canAdd: 'Missing Info'})
+      }
     };
   
     //the values in the parenthesis are the input.
@@ -88,40 +102,42 @@ export default class IntroPage extends React.Component {
                 style={styles.classScroll}
                 data={this.state.classes}
                 renderItem={(aClass) => (
-                  <NormalText>{aClass.item}</NormalText>
+                  <NormalText>{aClass.className}</NormalText>
                 )}
               />
             </View>
   
             <View style={styles.row}>
               <View>
-                <TextInput
-                  onChangeText={(aeUser) => this.setState({ aeUser })}
-                  style={styles.infoInput}
-                  value={this.state.aeUser}
-                  placeholder={'Aeries Username/Email'}
-                />
-      
-                <TextInput
-                  onChangeText={(aePass) => this.setState({ aePass })}
-                  style={styles.infoInput}
-                  value={this.state.aePass}
-                  placeholder={'Aeries Password'}
-                />
+
                 <TextInput
                   placeholder={'Class Name'}
                   style={styles.infoInput}
-                  value={this.state.newName}
-                  onChangeText={(newName) => this.setState({ newName })}
+                  value={this.state.newClass}
+                  onChangeText={(newClass) => this.setState({ newClass })}
                 />
+                <TextInput
+                  onChangeText={(newTime) => this.setState({ newTime })}
+                  style={styles.infoInput}
+                  value={this.state.newTime}
+                  placeholder={'What is the start time?'}
+                />
+      
+                <TextInput
+                  onChangeText={(newLink) => this.setState({ newLink })}
+                  style={styles.infoInput}
+                  value={this.state.newLink}
+                  placeholder={'What is the meeting link?'}
+                />
+                <Text>{this.state.newClass} {this.state.newLink} {this.state.newTime}</Text>
               </View>
               <Pressable
                 style={styles.addButton}
                 onPress={() => this.addClass()}>
-                <NormalText>Add</NormalText>
+                <NormalText>{this.state.canAdd}</NormalText>
               </Pressable>
+              
             </View>
-
 
 
 
@@ -214,8 +230,8 @@ export default class IntroPage extends React.Component {
       alignContent: 'center',
     },
     addButton: {
-      width: '5%',
-      height: '50%',
+      width: 50,
+      height: '96%',
       margin: 3,
       borderColor: Colors.cyan,
       borderWidth: 2,

@@ -17,28 +17,28 @@ export default class App extends React.Component {
 
   constructor() {
     super();
-    let assignments = [];
-    let extraAssignments = [];
-
-    Data.forEach((element, index) => {
-      let className = element.ClassName;
-      let assignmentName = element.AssignmentName;
-      let dueDate = element.DueDate;
-      let assignment = {
-        Class: className,
-        Assignment: assignmentName,
-        Due: dueDate,
-      };
-      if(index<4){
-        assignments.push(assignment);
-      } else{
-        extraAssignments.push(assignment);
-      }
-      
-    });
 
     this.state = {
-      assignments,
+      assignments: [
+        {
+          class: "Class:",
+          assignment: "Assignment:",
+          dueDate: "Due Date:",
+        }
+      ],
+      extraAssignments: [
+        {
+          class: "Class:",
+          assignment: "Assignment:",
+          dueDate: "Due Date:",
+        }
+      ],
+      grades: [
+        {
+          class: "Class:",
+          gradePercentage: "Grade Percentage:",
+        }
+      ],
       practiceSet: {
         mon:[{
           meetingLink: "link",
@@ -168,7 +168,11 @@ export default class App extends React.Component {
         sub: '',
         showUpcoming: 0,
         tabShown: 0,
+      
     }
+
+    this.getGrades();
+    this.getCanvasAssignments();
     
   }
 
@@ -188,6 +192,36 @@ export default class App extends React.Component {
       this.setDate();
       this.todaysMeetings();
     }, 500);
+  }
+
+  getCanvasAssignments = () => {
+    Data.forEach((element, index) => {
+      let className = element.ClassName;
+      let assignmentName = element.AssignmentName;
+      let dueDate = element.DueDate;
+      let assignment = {
+        class: className,
+        assignment: assignmentName,
+        dueDate: dueDate,
+      };
+      if(index<4){
+        this.state.assignments.push(assignment);
+      } else{
+        this.state.extraAssignments.push(assignment);
+      }
+      
+    });
+  }
+
+  getGrades = () => {
+    Data.forEach((element, index) => {
+      let className = element.ClassName;
+      let gradePercent = element.Grade;
+      let grade = {
+        class: className,
+        gradePercent: gradePercent,
+      };
+    });
   }
 
   todaysMeetings = () => {
@@ -304,43 +338,24 @@ export default class App extends React.Component {
   //MAKES A TABLE FOR ASSIGNMENTS
   listAssignments = () => {
     let assignments = this.state.assignments;
-    if (assignments[0].Class != "Class:") {
-      let temp = {
-        Class: "Class:",
-        Assignment: "Assigment:",
-        Due: "Due Date:"
-      };
-      assignments.splice(0, 0, temp);
-    }
     if (this.state.tabShown == 2) {
       return assignments.map((assignment, index) => (
         <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-          <View style={{flex:1}}><NormalText>      {assignment.Class}</NormalText></View>
-          <View style={{flex:1}}><NormalText>      {assignment.Assignment}</NormalText></View>
-          <View style={{flex:1}}><NormalText>      {assignment.Due}</NormalText></View>
+          <View style={{flex:1}}><NormalText>      {assignment.class}</NormalText></View>
+          <View style={{flex:1}}><NormalText>      {assignment.assignment}</NormalText></View>
+          <View style={{flex:1}}><NormalText>      {assignment.dueDate}</NormalText></View>
         </View>  
       )) 
     }
   }
 
   listGrades = () => {
-    let assignments = this.state.assignments;
-    if (assignments[0].Class != "Class:") {
-      let temp = {
-        Class: "Class:",
-        Grades: "Grades:"
-      };
-      assignments.splice(0, 0, temp);
-    }
+    let grades = this.state.grades;
     if (this.state.tabShown == 3) {
-      <View style={styles.tables}>
-        <View style={{flex:1}}><NormalText>Class:</NormalText></View>
-        <View style={{flex:1}}><NormalText>Grade Percentage:</NormalText></View>
-      </View>  
-      return assignments.map((assignment, index) => (
+      return grades.map((grade, index) => (
         <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-          <View style={{flex:1}}><NormalText>     {assignment.Class}</NormalText></View>
-          <View style={{flex:1}}><NormalText>     {assignment.Due}</NormalText></View>
+          <View style={{flex:1}}><NormalText>     {grade.Class}</NormalText></View>
+          <View style={{flex:1}}><NormalText>     {grade.Due}</NormalText></View>
         </View>  
       )) 
     }
