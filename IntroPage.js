@@ -42,6 +42,7 @@ export default class IntroPage extends React.Component {
         this.setState({newClass: ''});
         this.setState({newLink: '' });
         this.setState({newEndTime: ''});
+        console.log(this.state.classes);
       }else{
         this.setState({canAdd: 'Missing Info'})
       }
@@ -104,8 +105,8 @@ export default class IntroPage extends React.Component {
               <FlatList
                 style={styles.classScroll}
                 data={this.state.classes}
-                renderItem={(aClass) => (
-                  <NormalText>{aClass.className}</NormalText>
+                renderItem={(className) => (
+                  <Text>{className.aName}</Text>
                 )}
               />
             </View>
