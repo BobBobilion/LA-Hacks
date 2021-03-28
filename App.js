@@ -18,6 +18,7 @@ export default class App extends React.Component {
   constructor() {
     super();
     let assignments = [];
+    let extraAssignments = [];
 
     Data.forEach((element, index) => {
       let className = element.ClassName;
@@ -28,7 +29,12 @@ export default class App extends React.Component {
         Assignment: assignmentName,
         Due: dueDate,
       };
-      assignments.push(assignment);
+      if(index<4){
+        assignments.push(assignment);
+      } else{
+        extraAssignments.push(assignment);
+      }
+      
     });
 
     this.state = {
