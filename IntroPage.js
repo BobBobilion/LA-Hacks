@@ -105,8 +105,8 @@ export default class IntroPage extends React.Component {
               <FlatList
                 style={styles.classScroll}
                 data={this.state.classes}
-                renderItem={(className) => (
-                  <Text>{className.aName}</Text>
+                renderItem={(classes) => (
+                  <Text>{classes.className}</Text>
                 )}
               />
             </View>
