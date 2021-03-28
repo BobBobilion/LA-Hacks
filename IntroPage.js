@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, Pressable, Image, StyleSheet, Dimensions, TextInput, FlatList } from 'react-native';
+import { Text, View, Pressable, Image, StyleSheet, Dimensions, TextInput, ScrollView, FlatList } from 'react-native';
 import Constants from 'expo-constants';
 import {
   screenDimensions,
@@ -43,6 +43,7 @@ export default class IntroPage extends React.Component {
         this.setState({newLink: '' });
         this.setState({newEndTime: ''});
         console.log(this.state.classes);
+        console.log(this.state.listClassNames);
       }else{
         this.setState({canAdd: 'Missing Info'})
       }
@@ -100,16 +101,7 @@ export default class IntroPage extends React.Component {
               placeholder={'Aeries Password'}
             />
 
-            <View style={styles.classBox}>
-              <Text style={styles.classBoxTitle}>Classes</Text>
-              <FlatList
-                style={styles.classScroll}
-                data={this.state.classes}
-                renderItem={(classes) => (
-                  <Text>{classes.className}</Text>
-                )}
-              />
-            </View>
+            
   
             <View style={styles.row}>
               <View>
