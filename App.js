@@ -45,7 +45,7 @@ export default class App extends React.Component {
           className: "Arthur Facredyn",
           startHour: 9,
           startMin: 0,
-          endTime: 12,
+          endHour: 12,
           endMin: 0,
         },
         {
@@ -53,15 +53,22 @@ export default class App extends React.Component {
           className: "Arthur Facredyn2",
           startHour: 9,
           startMin: 0,
-          endTime: 12,
+          endHour: 12,
           endMin: 0,
         }],
         sun:[{
           meetingLink: "link",
           className: "Arthur Facredyn",
-          startHour: 9,
+          startHour: 0,
           startMin: "09",
-          endTime: 12, 
+          endHour: 1, 
+          endMin: 0,
+        },{
+          meetingLink: "link",
+          className: "Arthur Facredyn",
+          startHour: 0,
+          startMin: 2,
+          endHour: 5, 
           endMin: 0,
         },
         {
@@ -69,7 +76,7 @@ export default class App extends React.Component {
           className: "Arthur Facredyn2",
           startHour: 9,
           startMin: 59,
-          endTime: 12,
+          endHour: 12,
           endMin: 0,
         }],
         sat:[{
@@ -85,7 +92,7 @@ export default class App extends React.Component {
           className: "Arthur Facredyn2",
           startHour: 9,
           startMin: 0,
-          endTime: 12,
+          endHour: 12,
           endMin: 0,
         }],
   
@@ -94,7 +101,7 @@ export default class App extends React.Component {
           className: "Arthur Facredyn3",
           startHour: 12,
           startMin: 0,
-          endTime: 13,
+          endHour: 13,
           endMin: 0,
         }],
   
@@ -103,7 +110,7 @@ export default class App extends React.Component {
           className: "Arthur Facredyn4",
           startHour: 8,
           startMin: 0,
-          endTime: 10,
+          endHour: 10,
           endMin: 0,
         }],
   
@@ -112,7 +119,7 @@ export default class App extends React.Component {
           className: "Arthur Facredyn5",
           startHour: 9,
           startMin: 0,
-          endTime: 12,
+          endHour: 12,
           endMin: 0,
         },
         {
