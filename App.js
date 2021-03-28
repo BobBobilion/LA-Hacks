@@ -167,7 +167,6 @@ export default class App extends React.Component {
     return assignments.map((assignment, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
         <View style={{flex:1}}><NormalText>    - {assignment.Class}</NormalText></View>
-        <View style={{flex:1}}><NormalText>    - {assignment.Assignment}</NormalText></View>
         <View style={{flex:1}}><NormalText>    - {assignment.Due}</NormalText></View>
       </View>  
     )) 
@@ -237,8 +236,7 @@ export default class App extends React.Component {
           <View style={{ flexDirection: 'column' }}>
             <View style={styles.tables}>
             <View style={{flex:1}}><NormalText>Class:</NormalText></View>
-              <View style={{flex:1}}><NormalText>Assignment Name:</NormalText></View>
-              <View style={{flex:1}}><NormalText>Due Date:</NormalText></View>
+              <View style={{flex:1}}><NormalText>Grade Percentage:</NormalText></View>
             </View>  
             <View>{this.listGrades()}</View>
           </View>
@@ -249,17 +247,6 @@ export default class App extends React.Component {
           {this.state.practiceSet.mon[0].meetingLink}
           {(new Date()).getMilliseconds()}
         </NormalText>
-
-        <View style={styles.sectionBox}>
-          <Title style={styles.sectionTitles}>Zoom Meetings</Title>
-          <Button
-            onPress={() => console.log('button 1 pressed')}
-            onPressIn={() => console.log('pressIn')}
-            onPressOut={() => console.log('pressOut')}
-            onLongPress={() => console.log('Longpress')}>
-            button 1
-          </Button>
-        </View>
       </View>
     );
   }
