@@ -66,16 +66,16 @@ export default class App extends React.Component {
         },{
           meetingLink: "link",
           className: "Arthur Facredyn",
-          startHour: 0,
+          startHour: 8,
           startMin: 2,
-          endHour: 5, 
+          endHour: 9, 
           endMin: 0,
         },
         {
           meetingLink: "link2",
           className: "Arthur Facredyn2",
           startHour: 9,
-          startMin: 59,
+          startMin: 56,
           endHour: 12,
           endMin: 0,
         }],
@@ -239,6 +239,22 @@ export default class App extends React.Component {
 
   listOngoingMeetings = () => { 
     let ongoingMeetings = this.state.ongoingMeeting;
+    for (let i = 0; i < ongoingMeetings.length; i++){
+      if (ongoignMeetings[i].startMin < 10){
+        ongoignMeetings[i].startMin = "0" + ongoignMeetings[i].startMin;
+      }
+
+      if(ongoignMeetings[i].startHour == 0){
+        ongoignMeetings[i].startHour = 12;
+      }
+
+      if(ongoignMeetings[i].startHour <= 12){
+        ongoignMeetings[i].startMin = ongoignMeetings[i].startMin + " am";
+      } else {
+        ongoignMeetings[i].startMin = ongoignMeetings[i].startMin + " pm";
+      }
+
+    }
     return ongoingMeetings.map((element, index) => (
     <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
       <View style={{flex:1}}><NormalText>      {element.startHour}:{element.startMin}</NormalText></View>
@@ -252,6 +268,22 @@ export default class App extends React.Component {
 
   putOutMeetings = () => {
     let upcomingMeetings = this.state.meetingForToday;
+    for (let i = 0; i < upcomingMeetings.length; i++){
+      if (upcomingMeetings[i].startMin < 10){
+        upcomingMeetings[i].startMin = "0" + upcomingMeetings[i].startMin;
+      }
+
+      if(upcomingMeetings[i].startHour == 0){
+        upcomingMeetings[i].startHour = 12;
+      }
+
+      if(upcomingMeetings[i].startHour <= 12){
+        upcomingMeetings[i].startMin = upcomingMeetings[i].startMin + " am";
+      } else {
+        upcomingMeetings[i].startMin = upcomingMeetings[i].startMin + " pm";
+      }
+
+    }
     return upcomingMeetings.map((meeting, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
         <View style={{flex:1}}><NormalText>      {meeting.startHour}:{meeting.startMin}</NormalText></View>
