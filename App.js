@@ -24,7 +24,6 @@ export default class App extends React.Component {
       let assignmentName = element.AssignmentName;
       let dueDate = element.DueDate;
       let assignment = {
-        Number: index,
         Class: className,
         Assignment: assignmentName,
         Due: dueDate,
