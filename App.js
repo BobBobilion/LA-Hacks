@@ -250,8 +250,6 @@ export default class App extends React.Component {
   //MAKES A TABLE FOR ASSIGNMENTS
   listAssignments = () => {
     let assignments = this.state.assignments;
-    let temp = ["Class:", "Assignment:", "Due Date:"];
-    assignments.splice(0, 0, temp)
     if (this.state.tabShown == 2) {
       return assignments.map((assignment, index) => (
         <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
