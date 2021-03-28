@@ -32,7 +32,6 @@ export default class App extends React.Component {
     });
 
     this.state = {
-<<<<<<< HEAD
       assignments,
     }
     
@@ -42,12 +41,10 @@ export default class App extends React.Component {
     openClass: 0,
     showGoing: 0,
     day: '',
-    hour: '',
     nameClass: '',
     link: '',
     timeStart: '',
     timeEnd: '',
-    meetingsForToday: [],
 
     practiceSet: [
       {mon:[{
@@ -69,69 +66,34 @@ export default class App extends React.Component {
         startTime: "12",
         endTime: "13",
       }]},
-=======
-      assignments,practiceSet: {
-        mon:[{
-          meetingLink: "link",
-          className: "Arthur Facredyn",
-          startTime: "9",
-          endTime: "12",
-        },
-        {
-          meetingLink: "link2",
-          className: "Arthur Facredyn2",
-          startTime: "9",
-          endTime: "12",
-        }],
-  
-        tues:[{
-          meetingLink: "link3",
-          className: "Arthur Facredyn3",
-          startTime: "12",
-          endTime: "13",
-        }],
-  
-        wed:[{
-          meetingLink: "link4",
-          className: "Arthur Facredyn4",
-          startTime: "8",
-          endTime: "10",
-        }],
-  
-        thurs:[{
-          meetingLink: "link5",
-          className: "Arthur Facredyn5",
-          startTime: "9",
-          endTime: "12",
-        },
-        {
-          meetingLink: "link6",
-          className: "Arthur Facredyn6",
-          startTime: "7",
-          endTime: "9",
-        }],
-  
-        fri:[{
-          meetingLink: "link7",
-          className: "Arthur Facredyn7",
-          startTime: "14",
-          endTime: "16",
-        },]},
->>>>>>> 57ae42e529d2880b1968b9a34de4f702c93e8230
 
+      {wed:[{
+        meetingLink: "link4",
+        className: "Arthur Facredyn4",
+        startTime: "8",
+        endTime: "10",
+      }]},
 
-        openClass: 0,
-        showGoing: 0,
-        day: '',
-        nameClass: '',
-        link: '',
-        timeStart: '',
-        timeEnd: '',
+      {thurs:[{
+        meetingLink: "link5",
+        className: "Arthur Facredyn5",
+        startTime: "9",
+        endTime: "12",
+      },
+      {
+        meetingLink: "link6",
+        className: "Arthur Facredyn6",
+        startTime: "7",
+        endTime: "9",
+      }]},
 
-    }
-    
+      {fri:[{
+        meetingLink: "link7",
+        className: "Arthur Facredyn7",
+        startTime: "14",
+        endTime: "16",
+      },]}],
   }
-
 
 
   //UPDATE WINDOW
@@ -146,51 +108,13 @@ export default class App extends React.Component {
       this.updateWindow();
     }, 500);
     this.setDate();
-    this.todaysMeetings();
   }
 
-<<<<<<< HEAD
-  todaysMeetings = () => {
-      if (day == 1){
-        meetingsForToday = practiceSet[0];
-      } else if (day == 2){
-        meetingsForToday = practiceSet[1];
-      } else if (day == 3){
-        meetingsForToday = practiceSet[2];
-      } else if (day == 4){
-        meetingsForToday = practiceSet[3];
-      } else if (day == 5){
-        meetingsForToday = practiceSet[4];
-      }  else if (day == 0){
-        meetingsForToday = practiceSet[5];
-      } else if (day == 6){
-        meetingsForToday = practiceSet[6];
-      } 
-
-      for (var element in meetingsForToday){
-        
-      }
-
-  }
-
-  putOutMeetings = () => {
-    if (meetingForToday.length == 0){
-      //change a variable to say: No meetings for today
-    } else {
-      return this.state.meetingForToday.map(element, index) => {
-        <View>
-
-        </View>
-      }
+  grabMeetings = () => {
+    return this.state.practiceSet.map(element, index) => {
+      
     }
   }
-=======
-  // grabMeetings = () => {
-  //   return this.state.practiceSet.map(element, index) => {
-      
-  //   }
-  // }
->>>>>>> 57ae42e529d2880b1968b9a34de4f702c93e8230
 
   //MAKES A TABLE FOR ASSIGNMENTS
   listAssignments = () => {
@@ -205,8 +129,6 @@ export default class App extends React.Component {
 
   setDate = () => {
     this.setState({day: (new Date()).getDay()});
-    this.setState({hour: (new Date()).getHours})
-    new Date()).g
   }
 
   addClass = () => {
@@ -283,8 +205,7 @@ export default class App extends React.Component {
 
         
         <NormalText>
-          {this.state.practiceSet.mon[0].meetingLink}
-          {(new Date()).getMilliseconds()}
+          {this.state.day}
         </NormalText>
 
         <View style={styles.sectionBox}>
