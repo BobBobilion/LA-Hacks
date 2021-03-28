@@ -32,68 +32,67 @@ export default class App extends React.Component {
     });
 
     this.state = {
-      assignments,
+      assignments,practiceSet: {
+        mon:[{
+          meetingLink: "link",
+          className: "Arthur Facredyn",
+          startTime: "9",
+          endTime: "12",
+        },
+        {
+          meetingLink: "link2",
+          className: "Arthur Facredyn2",
+          startTime: "9",
+          endTime: "12",
+        }],
+  
+        tues:[{
+          meetingLink: "link3",
+          className: "Arthur Facredyn3",
+          startTime: "12",
+          endTime: "13",
+        }],
+  
+        wed:[{
+          meetingLink: "link4",
+          className: "Arthur Facredyn4",
+          startTime: "8",
+          endTime: "10",
+        }],
+  
+        thurs:[{
+          meetingLink: "link5",
+          className: "Arthur Facredyn5",
+          startTime: "9",
+          endTime: "12",
+        },
+        {
+          meetingLink: "link6",
+          className: "Arthur Facredyn6",
+          startTime: "7",
+          endTime: "9",
+        }],
+  
+        fri:[{
+          meetingLink: "link7",
+          className: "Arthur Facredyn7",
+          startTime: "14",
+          endTime: "16",
+        },]},
+
+
+        openClass: 0,
+        showGoing: 0,
+        day: '',
+        nameClass: '',
+        link: '',
+        timeStart: '',
+        timeEnd: '',
+
     }
     
   }
 
-  state = {
-    openClass: 0,
-    showGoing: 0,
-    day: '',
-    nameClass: '',
-    link: '',
-    timeStart: '',
-    timeEnd: '',
-
-    practiceSet: [
-      {mon:[{
-        meetingLink: "link",
-        className: "Arthur Facredyn",
-        startTime: "9",
-        endTime: "12",
-      },
-      {
-        meetingLink: "link2",
-        className: "Arthur Facredyn2",
-        startTime: "9",
-        endTime: "12",
-      }]},
-
-      {tues:[{
-        meetingLink: "link3",
-        className: "Arthur Facredyn3",
-        startTime: "12",
-        endTime: "13",
-      }]},
-
-      {wed:[{
-        meetingLink: "link4",
-        className: "Arthur Facredyn4",
-        startTime: "8",
-        endTime: "10",
-      }]},
-
-      {thurs:[{
-        meetingLink: "link5",
-        className: "Arthur Facredyn5",
-        startTime: "9",
-        endTime: "12",
-      },
-      {
-        meetingLink: "link6",
-        className: "Arthur Facredyn6",
-        startTime: "7",
-        endTime: "9",
-      }]},
-
-      {fri:[{
-        meetingLink: "link7",
-        className: "Arthur Facredyn7",
-        startTime: "14",
-        endTime: "16",
-      },]}],
-  }
 
 
   //UPDATE WINDOW
@@ -110,16 +109,17 @@ export default class App extends React.Component {
     this.setDate();
   }
 
-  grabMeetings = () => {
-    return this.state.practiceSet.map(element, index) => {
+  // grabMeetings = () => {
+  //   return this.state.practiceSet.map(element, index) => {
       
-    }
-  }
+  //   }
+  // }
 
   //MAKES A TABLE FOR ASSIGNMENTS
   listAssignments = () => {
-    return this.state.assignments.map((assignment) => (
-      <View style={styles.tables}>
+    let assignments = this.state.assignments;
+    return assignments.map((assignment, index) => (
+      <View style={{marginHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
         <View style={{flex:1}}><NormalText>    - {assignment.Class}</NormalText></View>
         <View style={{flex:1}}><NormalText>    - {assignment.Assignment}</NormalText></View>
         <View style={{flex:1}}><NormalText>    - {assignment.Due}</NormalText></View>
@@ -205,7 +205,8 @@ export default class App extends React.Component {
 
         
         <NormalText>
-          {this.state.day}
+          {this.state.practiceSet.mon[0].meetingLink}
+          {(new Date()).getMilliseconds()}
         </NormalText>
 
         <View style={styles.sectionBox}>
@@ -268,7 +269,8 @@ const styles = StyleSheet.create({
     marginVertical: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    backgroundColor: Colors.gray,
   }
 });
   

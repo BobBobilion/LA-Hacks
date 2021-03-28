@@ -30,6 +30,8 @@ export const Colors = {
     blue: '#96B4FF',
     yellow: '#FFE196',
     green: '#A3FFAA',
+    lightGray: '#EBEBEB',
+    gray: '#DEDCDC'
     }
 
 export class NormalText extends React.Component {
