@@ -91,8 +91,11 @@ export default class App extends React.Component {
         sat:[{}]
       },
 
-
+        openAssignment: 0,
         openClass: 0,
+        assignClass: '',
+        assignName: '',
+        assignDue: '',
         showGoing: 0,
         day: '',
         nameClass: '',
@@ -147,10 +150,43 @@ export default class App extends React.Component {
 
   addClass = () => {
     this.setState({openClass: 1});
+    
+  }
+
+  addAssignment = () => {
+    this.setState({openAssignment: 1});
+    this.setState({
+      assignClass: '',
+      assignName: '',
+      assignDue: '',
+    })
   }
   
   addClassFinish = () => {
-    
+    this.setState({openClass: 0});
+    let part = [{
+        meetingLink: this.state.link,
+        className: this.state.nameClass,
+        startTime: this.state.timeStart,
+        endTime: this.state.timeEnd,
+    }];
+    let something = this.state.sub;
+    something.push(part);
+    this.setState({sub: something});
+    this.setState({dummy: true});
+  }
+
+  addAssignmentFinish = () => {
+    this.setState({openAssignment: 0});
+    let part = {
+        Class: this.state.assignClass,
+        Assignment: this.state.assignName,
+        Due: this.state.assignDue,
+    };
+    let other = this.state.assignments;
+    other.push(part);
+    this.setState({assignments: other});
+    this.setState({dummy: true});
   }
 
 
@@ -184,8 +220,11 @@ export default class App extends React.Component {
         : null}
         </View>
         <View style={styles.assignmentBox}>
+          <View style={{flexDirection: 'row'}}>
           <View style={styles.headerBox}>
             <Text style={styles.sectionTitles}>Assignments</Text>
+          </View>
+            <Pressable style={styles.addition} onPress={() => this.addAssignment()}>+</Pressable>
           </View>
           <View style={{ flexDirection: 'column' }}>
             <View style={styles.tables}>
@@ -194,6 +233,20 @@ export default class App extends React.Component {
               <View style={{flex:1}}><NormalText>Due Date:</NormalText></View>
             </View>  
             <View>{this.listAssignments()}</View>
+            {this.state.openAssignment == 1 ? 
+        <View>
+          <Text>Please Enter:</Text>
+          <TextInput onChangeText={(assignClass) => this.setState({ assignClass })} style={styles.zoomInput} value={this.state.assignClass} placeholder={"Class Name"}/>
+          <TextInput onChangeText={(assignName) => this.setState({ assignName })} style={styles.zoomInput} value={this.state.assignName} placeholder={"Assignment Title"}/>
+          <TextInput onChangeText={(assignDue) => this.setState({ assignDue })} style={styles.zoomInput} value={this.state.assignDue} placeholder={"Due Date"}/>
+          <Pressable onPress={() => this.addAssignmentFinish()}>
+            <Text>
+              Click to Add
+            </Text>
+          </Pressable>
+        </View> 
+        : null}
+        {this.state.assignDue}
           </View>
         </View>
 
