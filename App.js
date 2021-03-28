@@ -118,9 +118,9 @@ export default class App extends React.Component {
     let assignments = this.state.assignments;
     return assignments.map((assignment, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>    - {assignment.Class}</NormalText></View>
-        <View style={{flex:1}}><NormalText>    - {assignment.Assignment}</NormalText></View>
-        <View style={{flex:1}}><NormalText>    - {assignment.Due}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {assignment.Class}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {assignment.Assignment}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {assignment.Due}</NormalText></View>
       </View>  
     )) 
   }
