@@ -72,6 +72,14 @@ export default class App extends React.Component {
           endMin: 0,
         },
         {
+          meetingLink: "link",
+          className: "Arthur Facredyn",
+          startHour: 15,
+          startMin: 0,
+          endHour: 17, 
+          endMin: 0,
+        },
+        {
           meetingLink: "link2",
           className: "Arthur Facredyn2",
           startHour: 9,
@@ -273,14 +281,10 @@ export default class App extends React.Component {
   listOngoingMeetings = () => { 
     let ongoingMeetings = this.state.ongoingMeeting;
     for (let i = 0; i < ongoingMeetings.length; i++){
-      let string = ongoingMeetings[i].startMin +'';
-      if (string.indexOf('m') != -1){
+      let someting = ongoingMeetings[i].startMin +'';
+      if (someting.indexOf("m") == -1){
         if (ongoingMeetings[i].startMin < 10){
           ongoingMeetings[i].startMin = "0" + ongoingMeetings[i].startMin;
-        }
-
-        if(ongoingMeetings[i].startHour == 0){
-          ongoingMeetings[i].startHour = 12;
         }
 
         if(ongoingMeetings[i].startHour <= 12){
@@ -291,9 +295,10 @@ export default class App extends React.Component {
       }
 
     }
+    //element.startHour > 12 ? {element.startHour - 12} : {element.startHour}
     return ongoingMeetings.map((element, index) => (
     <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-      <View style={{flex:1}}><NormalText>      {element.startHour}:{element.startMin}</NormalText></View>
+      <View style={{flex:1}}><NormalText>      {(element.startHour-1) % 12 + 1}:{element.startMin}</NormalText></View>
       <View style={{flex:1}}><NormalText>{element.className}</NormalText></View>
       <View style={{flex:1}}><NormalText>      {element.meetingLink}</NormalText></View>
     </View> 
@@ -305,14 +310,10 @@ export default class App extends React.Component {
   putOutMeetings = () => {
     let upcomingMeetings = this.state.meetingForToday;
     for (let i = 0; i < upcomingMeetings.length; i++){
-      let string = upcomingMeetings[i].startMin + '';
-      if (string.indexOf('m') != -1){
+      let someting = upcomingMeetings[i].startMin + '';
+      if (someting.indexOf("m") == -1){
         if (upcomingMeetings[i].startMin < 10){
           upcomingMeetings[i].startMin = "0" + upcomingMeetings[i].startMin;
-        }
-
-        if(upcomingMeetings[i].startHour == 0){
-          upcomingMeetings[i].startHour = 12;
         }
 
         if(upcomingMeetings[i].startHour <= 12){
@@ -320,12 +321,13 @@ export default class App extends React.Component {
         } else {
           upcomingMeetings[i].startMin = upcomingMeetings[i].startMin + " pm";
         }
+        
       }
     }
 
     return upcomingMeetings.map((meeting, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>      {meeting.startHour}:{meeting.startMin}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {(meeting.startHour-1) % 12 + 1}:{meeting.startMin}</NormalText></View>
         <View style={{flex:1}}><NormalText>{meeting.className}</NormalText></View>
         <View style={{flex:1}}><NormalText>      {meeting.meetingLink}</NormalText></View>
       </View>  
