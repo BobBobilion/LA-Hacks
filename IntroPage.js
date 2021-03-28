@@ -20,11 +20,17 @@ export default class IntroPage extends React.Component {
       aePass: '',
       canPass: 'Continue',
       page: 'IntroPage',
+      newClass: '',
+      classes: [],
+    };
+
+    addClass = () => {
+      let classes = [this.state.classes];
+      classes.push(this.state.newClass);
+      this.setState({ classes, newName: '' });
     };
   
     //the values in the parenthesis are the input.
-
-
     nextPage = () => {
       if(this.state.canvPass!=='' && this.state.canvUser!=='' && this.state.aePass!=='' && this.state.aeUser!==''){
         this.props.goToPage('Main');
@@ -75,8 +81,31 @@ export default class IntroPage extends React.Component {
               value={this.state.aePass}
               placeholder={'Aeries Password'}
             />
-  
 
+            <View style={styles.classBox}>
+              <Text style={styles.classBoxTitle}>Classes</Text>
+              <FlatList
+                style={styles.classScroll}
+                data={this.state.classes}
+                renderItem={(aClass) => (
+                  <NormalText>{aClass.item}</NormalText>
+                )}
+              />
+            </View>
+  
+            <View style={styles.row}>
+              <TextInput
+                placeholder={'Class Name'}
+                style={styles.infoInput}
+                value={this.state.newName}
+                onChangeText={(newName) => this.setState({ newName })}
+              />
+              <Pressable
+                style={styles.addButton}
+                onPress={() => this.addClass()}>
+                <NormalText>Add</NormalText>
+              </Pressable>
+            </View>
 
 
 
@@ -112,11 +141,26 @@ export default class IntroPage extends React.Component {
       fontWeight: 'bold',
     },
     classBox: {
-      width: '100%',
+      width: '50%',
       height: 100,
-      borderColor: 'white',
+      borderColor: Colors.gray,
       borderWidth: 2,
       borderRadius: 5,
+      marginVertical: 10,
+      alignSelf: 'center',
+    },
+    classBoxTitle: {
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: 16,
+      backgroundColor: Colors.blueGray,
+    },
+    classScroll: {
+      width: '100%',
+      backgroundColor: 'white',
+      borderColor: Colors.gray,
+      borderTopWidth: 2,
+      padding: 5,
     },
     button: {
       padding: 5,
@@ -147,8 +191,14 @@ export default class IntroPage extends React.Component {
       margin: 3,
       borderRadius: 3,
     },
-    addRemoveButton: {
-      width: '20%',
+    row: {
+      flexDirection: 'row',
+      width: '100%',
+      justifyContent: 'space-between',
+      marginVertical: 5,
+    },
+    addButton: {
+      width: '5%',
       margin: 3,
       borderColor: Colors.cyan,
       borderWidth: 2,
@@ -156,7 +206,7 @@ export default class IntroPage extends React.Component {
       paddingTop: 2,
       borderRadius: 3,
     },
-    addRemoveButtonText: {
+    addButtonText: {
       color: Colors.blueGray,
       textAlign: 'center',
       fontWeight: 'bold',
