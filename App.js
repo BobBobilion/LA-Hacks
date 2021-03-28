@@ -1,33 +1,42 @@
 import * as React from 'react';
-import { Text, View, Pressable, Image, StyleSheet } from 'react-native';
+import { Text, View, Pressable, Image, StyleSheet, Dimensions, TextInput } from 'react-native';
 import Constants from 'expo-constants';
- 
+import {
+  screenDimensions,
+  Colors,
+  NormalText,
+  Title,
+  Button,
+  LibraryStyles,
+} from './ComponentLibrary';
+import Main from './Main';
+import IntroPage from './IntroPage';
+
+
+
 
 export default class App extends React.Component {
+  state = {
+    page: 'Home',
+  };
 
-  constructor() {
-    super();
-  }
+  pickPageToRender = () => {
+    if (this.state.page === 'Main') {
+      return <Main goToPage={(page) => this.setState({ page })} />;
+    } else {
+      return <IntroPage goToPage={(page) => this.setState({ page })} />;
+    }
+  };
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Pressable style={styles.playButton} >
-          <Text style={styles.playText}>▶️</Text>
-        </Pressable>
-      </View>
-    );
+    return <View style={styles.container}>{this.pickPageToRender()}</View>;
   }
+  
 }
-
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ 
   container: {
-    flex: 1,
+    height: screenDimensions.screenHeight,
+    width: screenDimensions.screenWidth,
     paddingTop: Constants.statusBarHeight,
-    justifyContent: 'center',
-  },
-  playText: {
-    fontSize: 96,
-    textAlign: 'center',
   },
 });
