@@ -74,9 +74,9 @@ export default class App extends React.Component {
         {
           meetingLink: "https://iusd.zoom.us/j/81640477495?pwd=OVJETk91dEFxNEZzNUhMdHR1TmtvZz09",
           className: "Chemistry",
-          startHour: 1,
-          startMin: 15,
-          endHour: 3,
+          startHour: 9,
+          startMin: 56,
+          endHour: 12,
           endMin: 0,
         }],
         sat:[{
