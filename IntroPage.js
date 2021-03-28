@@ -9,6 +9,7 @@ import {
   Button,
   LibraryStyles,
 } from './ComponentLibrary';
+import App from './App';
 
 export default class IntroPage extends React.Component {
     //create state here
