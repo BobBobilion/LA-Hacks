@@ -111,6 +111,10 @@ export default class IntroPage extends React.Component {
               />
             </View>
           </View>
+
+          <Pressable onPress={() => this.props.goToPage('Main')}>
+            <Text> {this.state.canPass}</Text>
+          </Pressable>
   
           <View 
             style={{
@@ -147,14 +151,14 @@ export default class IntroPage extends React.Component {
   
   const styles = StyleSheet.create({
     container: {
-      width: screenWidth,
-      height: screenHeight,
+      width: screenDimensions.screenWidth,
+      height: screenDimensions.screenHeight,
       backgroundColor: Colors.darkGreen,
       alignItems: 'center',
     },
     titleCard:{
       backgroundColor: Colors.blueGray,
-      width: screenWidth,
+      width: screenDimensions.screenWidth,
       height: Constants.statusBarHeight + 100,
       paddingHorizontal: 20,
       alignItems: 'center',
@@ -175,7 +179,7 @@ export default class IntroPage extends React.Component {
     button: {
       padding: 5,
       margin: 5,
-      width: screenWidth*.6,
+      width: (screenDimensions.screenWidth)*.6,
       alignItems: 'center',
       alignSelf: 'center',
       backgroundColor: Colors.forestGreen,
@@ -183,7 +187,7 @@ export default class IntroPage extends React.Component {
       borderRadius: 3,
     },
     infoInput: {
-      width: screenWidth*.8,
+      width: (screenDimensions.screenWidth)*.8,
       backgroundColor: Colors.cyan,
       padding: 5,
       margin: 3,
