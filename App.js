@@ -205,6 +205,7 @@ export default class App extends React.Component {
         
         <NormalText>
           {this.state.practiceSet.mon[0].meetingLink}
+          {(new Date()).getMilliseconds()}
         </NormalText>
 
         <View style={styles.sectionBox}>
