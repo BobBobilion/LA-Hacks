@@ -1,36 +1,60 @@
-export default function getCanvasAssignments(username="", password=""){
+export default function GetCanvasAssignments(username="", password=""){
     const cheerio = require('cheerio');
     const $ = cheerio.load(Canvas)
   
-    var classes = []
+    var assignments = []
     var dates = []
+    var classes = []
   
     const nonAssignments = ["Today", "Add To Do", "Show My Grades", "opportunities popup", "Dashboard Options", "Load prior dates", "Load more", "Show All", ""]
     const daysOfWeek = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday",]
+    const monthsOfYear = ["January","February","March","April","May","June","July",]
   
     $("span.eHiXd_caGd").each(function (index) {
       let assignment = $(this).text()
+      assignment = assignment.substring(0, assignment.indexOf(","))
       if(!nonAssignments.includes(assignment)){
-        classes[index] = assignment
+        assignments[assignments.length] = assignment
+        console.log($(this).parent().children("span").text())
       }
     })
   
-    $("h2.fOyUs_bGBk").each(function (index) {
+    $("span.ergWt_bGBk").each(function (index) {
       let date = $(this).text()
       
-      daysOfWeek.forEach((element, index) =>{
-        let indexOfDay = date.indexOf(element)
-        if(indexOfDay!== -1){
-          date = date.substring(0, indexOfDay) + date.substring(indexOfDay + element.length )
-        }
+    //   daysOfWeek.forEach((element, index) =>{
+    //     let indexOfDay = date.indexOf(element)
+    //     if(indexOfDay!== -1){
+    //       date = date.substring(0, indexOfDay) + date.substring(indexOfDay + element.length )
+    //     }
+    //   })
+
+        monthsOfYear.forEach((element, index) =>{
+            let indexOfMonth = date.indexOf(element)
+            if(indexOfMonth !== -1){
+                date = date.substring(indexOfMonth)
+                date = date.substring(0, date.indexOf(","))
+                dates[dates.length] = date
+            }
       })
       
-      dates[index] = date
     })
+
+    $("span.enRcg_bGBk").each(function (index) {
+        let teacher = $(this).text();
+        $(this).parent
+        
+        if(teacher.length > 20 && classes.length < assignments.length){
+            classes[classes.length] = teacher;
+        }
+      })
+
   
+    console.log(classes)
+    console.log(assignments)
     console.log(dates)
   
-    return classes
+    return {assignments: assignments, classes: classes, dueDates: dates}
   }
   
   
