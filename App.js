@@ -141,7 +141,6 @@ export default class App extends React.Component {
         assignClass: '',
         assignName: '',
         assignDue: '',
-        showGoing: 0,
         day: '',
         nameClass: '',
         link: '',
@@ -152,6 +151,7 @@ export default class App extends React.Component {
         meetingForToday: [],
         ongoingMeeting: [],
         sub: '',
+        tabShown: 0,
     }
     
   }
@@ -250,23 +250,33 @@ export default class App extends React.Component {
   //MAKES A TABLE FOR ASSIGNMENTS
   listAssignments = () => {
     let assignments = this.state.assignments;
-    return assignments.map((assignment, index) => (
-      <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>      {assignment.Class}</NormalText></View>
-        <View style={{flex:1}}><NormalText>      {assignment.Assignment}</NormalText></View>
-        <View style={{flex:1}}><NormalText>      {assignment.Due}</NormalText></View>
-      </View>  
-    )) 
+    let temp = ["Class:", "Assignment:", "Due Date:"];
+    assignments.splice(0, 0, temp)
+    if (this.state.tabShown == 2) {
+      return assignments.map((assignment, index) => (
+        <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
+          <View style={{flex:1}}><NormalText>      {assignment.Class}</NormalText></View>
+          <View style={{flex:1}}><NormalText>      {assignment.Assignment}</NormalText></View>
+          <View style={{flex:1}}><NormalText>      {assignment.Due}</NormalText></View>
+        </View>  
+      )) 
+    }
   }
 
   listGrades = () => {
     let assignments = this.state.assignments;
-    return assignments.map((assignment, index) => (
-      <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>     {assignment.Class}</NormalText></View>
-        <View style={{flex:1}}><NormalText>     {assignment.Due}</NormalText></View>
+    if (this.state.tabShown == 3) {
+      <View style={styles.tables}>
+        <View style={{flex:1}}><NormalText>Class:</NormalText></View>
+        <View style={{flex:1}}><NormalText>Grade Percentage:</NormalText></View>
       </View>  
-    )) 
+      return assignments.map((assignment, index) => (
+        <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
+          <View style={{flex:1}}><NormalText>     {assignment.Class}</NormalText></View>
+          <View style={{flex:1}}><NormalText>     {assignment.Due}</NormalText></View>
+        </View>  
+      )) 
+    }
   }
 
   setDate = () => {
@@ -316,13 +326,17 @@ export default class App extends React.Component {
     this.setState({dummy: true});
   }
 
+  selectTab = (n) => {
+    this.setState({tabShown: n});
+  }
+
 
 
   render() {
     return (
       <View style={{
         width: screenDimensions.screenWidth,
-        height: 2 * screenDimensions.screenHeight,
+        height: screenDimensions.screenHeight,
         backgroundColor: Colors.blueGray,
       }}>
         <View style={styles.assignmentBox}>
@@ -356,17 +370,13 @@ export default class App extends React.Component {
         </View>
         <View style={styles.assignmentBox}>
           <View style={{flexDirection: 'row'}}>
-          <View style={styles.headerBox}>
+          <Pressable style={styles.headerBox} onPress={() => this.selectTab(2)}>
             <Text style={styles.sectionTitles}>Assignments</Text>
-          </View>
+          </Pressable>
             <Pressable style={styles.addition} onPress={() => this.addAssignment()}>+</Pressable>
           </View>
           <View style={{ flexDirection: 'column' }}>
-            <View style={styles.tables}>
-            <View style={{flex:1}}><NormalText>Class:</NormalText></View>
-              <View style={{flex:1}}><NormalText>Assignment Name:</NormalText></View>
-              <View style={{flex:1}}><NormalText>Due Date:</NormalText></View>
-            </View>  
+          
             <View>{this.listAssignments()}</View>
             {this.state.openAssignment == 1 ? 
         <View>
@@ -386,14 +396,10 @@ export default class App extends React.Component {
         </View>
 
         <View style={styles.assignmentBox}>
-          <View style={styles.headerBox}>
+          <Pressable style={styles.headerBox} onPress={() => this.selectTab(3)}>
             <Text style={styles.sectionTitles}>Grades</Text>
-          </View>
+          </Pressable>
           <View style={{ flexDirection: 'column' }}>
-            <View style={styles.tables}>
-            <View style={{flex:1}}><NormalText>Class:</NormalText></View>
-              <View style={{flex:1}}><NormalText>Grade Percentage:</NormalText></View>
-            </View>  
             <View>{this.listGrades()}</View>
           </View>
         </View>
