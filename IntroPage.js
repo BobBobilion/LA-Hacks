@@ -138,7 +138,6 @@ export default class IntroPage extends React.Component {
                   value={this.state.newLink}
                   placeholder={'What is the meeting link?'}
                 />
-                <Text>{this.state.newClass} {this.state.newLink} {this.state.newTime}</Text>
               </View>
               <Pressable
                 style={styles.addButton}
