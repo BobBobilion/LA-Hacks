@@ -162,6 +162,7 @@ export default class App extends React.Component {
   updateWindow = () => {
     screenDimensions.screenWidth = Dimensions.get('window').width;
     screenDimensions.screenHeight = Dimensions.get('window').height;
+    this.setState({dummy: true});
   }
 
   //TIMER FOR WINDOW DIMENSION CHECK
@@ -270,6 +271,8 @@ export default class App extends React.Component {
 
   setDate = () => {
     this.setState({day: (new Date()).getDay()});
+    this.setState({hour: (new Date()).getHours()});
+    this.setState({minutes: (new Date()).getMinutes()});
   }
 
   addClass = () => {
@@ -317,7 +320,11 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={LibraryStyles.container}>
+      <View style={{
+        width: screenDimensions.screenWidth,
+        height: 2 * screenDimensions.screenHeight,
+        backgroundColor: Colors.blueGray,
+      }}>
         <View style={styles.assignmentBox}>
           <View style={{flexDirection: "row"}}>
             <View style={styles.headerBox}>
@@ -395,7 +402,8 @@ export default class App extends React.Component {
         <NormalText>
           Min: {this.state.minutes}
           Hours: {this.state.hour}
-          {/* upcoming: {this.state.meetingForToday[0].meetingLink} */}
+          Width: {screenDimensions.screenWidth}
+          Height: {screenDimensions.screenHeight}
         </NormalText>
       </View>
     );
