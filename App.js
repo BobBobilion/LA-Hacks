@@ -24,6 +24,7 @@ export default class App extends React.Component {
       let assignmentName = element.AssignmentName;
       let dueDate = element.DueDate;
       let assignment = {
+        Number: index,
         Class: className,
         Assignment: assignmentName,
         Due: dueDate,
@@ -110,16 +111,17 @@ export default class App extends React.Component {
     this.setDate();
   }
 
-  grabMeetings = () => {
-    return this.state.practiceSet.map(element, index) => {
+  // grabMeetings = () => {
+  //   return this.state.practiceSet.map(element, index) => {
       
-    }
-  }
+  //   }
+  // }
 
   //MAKES A TABLE FOR ASSIGNMENTS
   listAssignments = () => {
-    return this.state.assignments.map((assignment) => (
-      <View style={styles.tables}>
+    let assignments = this.state.assignments;
+    return assignments.map((assignment, index) => (
+      <View style={{marginHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
         <View style={{flex:1}}><NormalText>    - {assignment.Class}</NormalText></View>
         <View style={{flex:1}}><NormalText>    - {assignment.Assignment}</NormalText></View>
         <View style={{flex:1}}><NormalText>    - {assignment.Due}</NormalText></View>
@@ -268,7 +270,8 @@ const styles = StyleSheet.create({
     marginVertical: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    backgroundColor: Colors.gray,
   }
 });
   
