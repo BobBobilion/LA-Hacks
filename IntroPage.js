@@ -14,10 +14,10 @@ import App from './App';
 export default class IntroPage extends React.Component {
     //create state here
     state = {
-      canvUser: '',
-      canvPass: '',
-      aeUser: '',
-      aePass: '',
+      canvUser: null,
+      canvPass: null,
+      aeUser: null,
+      aePass: null,
       canPass: 'Continue',
       page: 'IntroPage',
     };
