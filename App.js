@@ -18,6 +18,7 @@ export default class App extends React.Component {
   constructor() {
     super();
     let assignments = [];
+    let extraAssignments = [];
 
     Data.forEach((element, index) => {
       let className = element.ClassName;
@@ -28,7 +29,12 @@ export default class App extends React.Component {
         Assignment: assignmentName,
         Due: dueDate,
       };
-      assignments.push(assignment);
+      if(index<4){
+        assignments.push(assignment);
+      } else{
+        extraAssignments.push(assignment);
+      }
+      
     });
 
     this.state = {
@@ -128,9 +134,15 @@ export default class App extends React.Component {
         },]},
 
 
+        openAssignment: 0,
         openClass: 0,
         showGoing: 1,
         day: 0,
+        assignClass: '',
+        assignName: '',
+        assignDue: '',
+        showGoing: 0,
+        day: '',
         nameClass: '',
         link: '',
         timeStart: '',
@@ -246,19 +258,59 @@ export default class App extends React.Component {
     )) 
   }
 
+  listGrades = () => {
+    let assignments = this.state.assignments;
+    return assignments.map((assignment, index) => (
+      <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
+        <View style={{flex:1}}><NormalText>     {assignment.Class}</NormalText></View>
+        <View style={{flex:1}}><NormalText>     {assignment.Due}</NormalText></View>
+      </View>  
+    )) 
+  }
+
   setDate = () => {
     this.setState({day: (new Date()).getDay()});
-    this.setState({hour: (new Date()).getHours()});
-    this.setState({minutes: (new Date()).getMinutes()});
   }
 
   addClass = () => {
     this.setState({openClass: 1});
-    this.setState({ dummy: true});
+    
+  }
+
+  addAssignment = () => {
+    this.setState({openAssignment: 1});
+    this.setState({
+      assignClass: '',
+      assignName: '',
+      assignDue: '',
+    })
   }
   
   addClassFinish = () => {
-    
+    this.setState({openClass: 0});
+    let part = [{
+        meetingLink: this.state.link,
+        className: this.state.nameClass,
+        startTime: this.state.timeStart,
+        endTime: this.state.timeEnd,
+    }];
+    let something = this.state.sub;
+    something.push(part);
+    this.setState({sub: something});
+    this.setState({dummy: true});
+  }
+
+  addAssignmentFinish = () => {
+    this.setState({openAssignment: 0});
+    let part = {
+        Class: this.state.assignClass,
+        Assignment: this.state.assignName,
+        Due: this.state.assignDue,
+    };
+    let other = this.state.assignments;
+    other.push(part);
+    this.setState({assignments: other});
+    this.setState({dummy: true});
   }
 
 
@@ -296,8 +348,11 @@ export default class App extends React.Component {
         : null}
         </View>
         <View style={styles.assignmentBox}>
+          <View style={{flexDirection: 'row'}}>
           <View style={styles.headerBox}>
             <Text style={styles.sectionTitles}>Assignments</Text>
+          </View>
+            <Pressable style={styles.addition} onPress={() => this.addAssignment()}>+</Pressable>
           </View>
           <View style={{ flexDirection: 'column' }}>
             <View style={styles.tables}>
@@ -306,6 +361,20 @@ export default class App extends React.Component {
               <View style={{flex:1}}><NormalText>Due Date:</NormalText></View>
             </View>  
             <View>{this.listAssignments()}</View>
+            {this.state.openAssignment == 1 ? 
+        <View>
+          <Text>Please Enter:</Text>
+          <TextInput onChangeText={(assignClass) => this.setState({ assignClass })} style={styles.zoomInput} value={this.state.assignClass} placeholder={"Class Name"}/>
+          <TextInput onChangeText={(assignName) => this.setState({ assignName })} style={styles.zoomInput} value={this.state.assignName} placeholder={"Assignment Title"}/>
+          <TextInput onChangeText={(assignDue) => this.setState({ assignDue })} style={styles.zoomInput} value={this.state.assignDue} placeholder={"Due Date"}/>
+          <Pressable onPress={() => this.addAssignmentFinish()}>
+            <Text>
+              Click to Add
+            </Text>
+          </Pressable>
+        </View> 
+        : null}
+        {this.state.assignDue}
           </View>
         </View>
 
@@ -314,14 +383,11 @@ export default class App extends React.Component {
             <Text style={styles.sectionTitles}>Grades</Text>
           </View>
           <View style={{ flexDirection: 'column' }}>
-            <Button
-              onPress={() => console.log('button 1 pressed')}
-              onPressIn={() => console.log('pressIn')}
-              onPressOut={() => console.log('pressOut')}
-              onLongPress={() => console.log('Longpress')}>
-              button 1
-            </Button>
-            
+            <View style={styles.tables}>
+            <View style={{flex:1}}><NormalText>Class:</NormalText></View>
+              <View style={{flex:1}}><NormalText>Grade Percentage:</NormalText></View>
+            </View>  
+            <View>{this.listGrades()}</View>
           </View>
         </View>
 
@@ -331,17 +397,6 @@ export default class App extends React.Component {
           Hours: {this.state.hour}
           {/* upcoming: {this.state.meetingForToday[0].meetingLink} */}
         </NormalText>
-
-        <View style={styles.sectionBox}>
-          <Title style={styles.sectionTitles}>Zoom Meetings</Title>
-          <Button
-            onPress={() => console.log('button 1 pressed')}
-            onPressIn={() => console.log('pressIn')}
-            onPressOut={() => console.log('pressOut')}
-            onLongPress={() => console.log('Longpress')}>
-            button 1
-          </Button>
-        </View>
       </View>
     );
   }
@@ -394,7 +449,8 @@ const styles = StyleSheet.create({
     marginVertical: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    backgroundColor: Colors.gray,
   }
 });
   

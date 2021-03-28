@@ -30,6 +30,7 @@ export const Colors = {
     cyan: '#B5FEFE',
     green: '#A8FFCE',
     darkGreen: '#99E8D2',
+    forestGreen: '#8BCCA8',
     lightGray: '#EBEBEB',
     gray: '#DEDCDC'
     }
