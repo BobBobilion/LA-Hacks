@@ -149,8 +149,9 @@ export default class App extends React.Component {
 
   //MAKES A TABLE FOR ASSIGNMENTS
   listAssignments = () => {
-    return this.state.assignments.map((assignment) => (
-      <View style={styles.tables}>
+    let assignments = this.state.assignments;
+    return assignments.map((assignment, index) => (
+      <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
         <View style={{flex:1}}><NormalText>    - {assignment.Class}</NormalText></View>
         <View style={{flex:1}}><NormalText>    - {assignment.Assignment}</NormalText></View>
         <View style={{flex:1}}><NormalText>    - {assignment.Due}</NormalText></View>
@@ -213,7 +214,7 @@ export default class App extends React.Component {
               <View style={{flex:1}}><NormalText>Assignment Name:</NormalText></View>
               <View style={{flex:1}}><NormalText>Due Date:</NormalText></View>
             </View>  
-            <View style={styles.table}>{this.listAssignments()}</View>
+            <View>{this.listAssignments()}</View>
           </View>
         </View>
 
@@ -230,9 +231,6 @@ export default class App extends React.Component {
               button 1
             </Button>
             
-            <View style={styles.assignments}>
-              <Text>oi;jasdf</Text>
-            </View>
           </View>
         </View>
 
@@ -265,6 +263,8 @@ const styles = StyleSheet.create({
     width: screenDimensions.screenWidth * 0.9,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    borderBottomRightRadius: 3,
+    borderBottomLeftRadius: 3,
   },
   headerBox: {
     backgroundColor: Colors.green,
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
     width: (screenDimensions.screenWidth * .9)/2,
   },
   tables: {
-    marginHorizontal: (screenDimensions.screenWidth*.1)/4,
+    paddingHorizontal: (screenDimensions.screenWidth*.1)/4,
     marginVertical: 1,
     flexDirection: 'row',
     alignItems: 'center',

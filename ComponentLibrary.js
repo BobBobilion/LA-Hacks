@@ -25,11 +25,11 @@ export var screenDimensions = {
 
 //THEME COLORS
 export const Colors = {
-    pink: '#FFC9DD',
-    lightPink: '#B1C7FF',
-    blue: '#96B4FF',
-    yellow: '#FFE196',
-    green: '#A3FFAA',
+    skyBlue: '#A8D1FF',
+    blueGray: '#99D3E8',
+    cyan: '#B5FEFE',
+    green: '#A8FFCE',
+    darkGreen: '#99E8D2',
     lightGray: '#EBEBEB',
     gray: '#DEDCDC'
     }
@@ -69,7 +69,7 @@ export const LibraryStyles = StyleSheet.create({
   container: {
     width: screenDimensions.screenWidth,
     height: screenDimensions.screenHeight + Constants.statusBarHeight,
-    backgroundColor: Colors.lightPink,
+    backgroundColor: Colors.blueGray,
     paddingTop: Constants.statusBarHeight,
   },
   normalText: {
