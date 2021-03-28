@@ -28,7 +28,7 @@ export default class App extends React.Component {
         Assignment: assignmentName,
         Due: dueDate,
       };
-      assignments.push(assignment);
+        assignments.push(assignment);
     });
 
     this.state = {
@@ -114,24 +114,22 @@ export default class App extends React.Component {
   todaysMeetings = () => {
     let sub = [];
       if (this.state.day == 1){
-        sub = practiceSet[0];
+        sub = this.state.practiceSet[0];
       } else if (this.state.day == 2){
-        sub = practiceSet[1];
+        sub = this.state.practiceSet[1];
       } else if (this.state.day == 3){
-        sub = practiceSet[2];
+        sub = this.state.practiceSet[2];
       } else if (this.state.day == 4){
-        sub = practiceSet[3];
+        sub = this.state.practiceSet[3];
       } else if (this.state.day == 5){
-        sub = practiceSet[4];
+        sub = this.state.practiceSet[4];
       }  else if (this.state.day == 0){
-        sub = practiceSet[5];
+        sub = this.state.practiceSet[5];
       } else if (this.state.day == 6){
-        sub = practiceSet[6];
+        sub = this.state.practiceSet[6];
       } 
 
-      for (var element in meetingsForToday){
-        
-      }
+
 
   }
 
