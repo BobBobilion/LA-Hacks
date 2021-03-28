@@ -75,8 +75,8 @@ export default class App extends React.Component {
         sat:[{
           meetingLink: "link",
           className: "Arthur Facredyn",
-          startHour: 22,
-          startMin: "00",
+          startHour: 23,
+          startMin: 0,
           endHour: 23,
           endMin: 55
         },
@@ -84,7 +84,7 @@ export default class App extends React.Component {
           meetingLink: "link2",
           className: "Arthur Facredyn2",
           startHour: 9,
-          startMin: "00",
+          startMin: 0,
           endTime: 12,
           endMin: 0,
         }],
@@ -136,11 +136,11 @@ export default class App extends React.Component {
 
         openAssignment: 0,
         openClass: 0,
+        showGoing: 1,
         day: 0,
         assignClass: '',
         assignName: '',
         assignDue: '',
-        showGoing: 0,
         day: '',
         nameClass: '',
         link: '',
@@ -151,7 +151,7 @@ export default class App extends React.Component {
         meetingForToday: [],
         ongoingMeeting: [],
         sub: '',
-        showUpcoming: 0,
+        tabShown: 0,
     }
     
   }
@@ -201,26 +201,18 @@ export default class App extends React.Component {
         }
       });
 
-      if (upcoming.length > 0){
-        this.setState({showUpcoming: 1});
-      }
-
       this.setState({meetingForToday: upcoming})
 
-       let ongoing = this.state.sub.filter((element, index) => {
-         //need to add something for the start time hours and minutes
-         if ((element.startHour < this.state.hour || (element.startHour == this.state.hour && element.startMin < this.state.minutes)) && (element.endHour > this.state.hour || (element.endHour == this.state.hour && element.endMin > this.state.minutes))){
-           return element;
-         } 
-       });
-      
-       if (ongoing.length > 0){
-        this.setState({showGoing: 1});
-       } else {
-         this.setState({showGoing: 0});
-       }
+      // let ongoing = this.state.sub.filter((element, index) => {
+      //   //need to add something for the start time hours and minutes
+      //   if (element.startHour > this.state.hour && element.startMin > this.state.minutes){
+      //     return element;
+      //   } else if (element.startHour == this.state.hour && element.startMin > this.state.minutes){
+      //     return element;
+      //   }
+      // });
 
-       this.setState({ongoingMeeting: ongoing});
+      // this.setState({ongoingMeeting: ongoing});
 
       console.log(this.state.sub);
       console.log(this.state.ongoingMeeting);
@@ -228,24 +220,28 @@ export default class App extends React.Component {
 
   }
 
-  listOngoingMeetings = () => { 
-      let ongoingMeetings = this.state.ongoingMeeting;
-      return ongoingMeetings.map((element, index) => (
+  listOngoingMeetings = () => {
+    if (this.state.meetingForToday.length == 0){
+      //change a variable to say: No meetings for today
+
+    } else {
+      this.setState.showGoing = 1; 
+      return this.state.meetingForToday.map((element, index) => {
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>      {element.startHour}:{element.startMin}</NormalText></View>
-        <View style={{flex:1}}><NormalText>{element.className}</NormalText></View>
-        <View style={{flex:1}}><NormalText>      {element.meetingLink}</NormalText></View>
+        <View style={{flex:1}}><NormalText>{this.state.meetingForToday[index].startHour}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {this.state.meetingForToday[index].className}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {this.state.meetingForToday[index].meetingLink}</NormalText></View>
       </View> 
-      ))
-    this.setState({dummy: true});
+      })
+    }
   }
 
   putOutMeetings = () => {
     let upcomingMeetings = this.state.meetingForToday;
     return upcomingMeetings.map((meeting, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>      {meeting.startHour}:{meeting.startMin}</NormalText></View>
-        <View style={{flex:1}}><NormalText>{meeting.className}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {meeting.className}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {meeting.className}</NormalText></View>
         <View style={{flex:1}}><NormalText>      {meeting.meetingLink}</NormalText></View>
       </View>  
     )) 
@@ -254,23 +250,31 @@ export default class App extends React.Component {
   //MAKES A TABLE FOR ASSIGNMENTS
   listAssignments = () => {
     let assignments = this.state.assignments;
-    return assignments.map((assignment, index) => (
-      <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>      {assignment.Class}</NormalText></View>
-        <View style={{flex:1}}><NormalText>      {assignment.Assignment}</NormalText></View>
-        <View style={{flex:1}}><NormalText>      {assignment.Due}</NormalText></View>
-      </View>  
-    )) 
+    if (this.state.tabShown == 2) {
+      return assignments.map((assignment, index) => (
+        <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
+          <View style={{flex:1}}><NormalText>      {assignment.Class}</NormalText></View>
+          <View style={{flex:1}}><NormalText>      {assignment.Assignment}</NormalText></View>
+          <View style={{flex:1}}><NormalText>      {assignment.Due}</NormalText></View>
+        </View>  
+      )) 
+    }
   }
 
   listGrades = () => {
     let assignments = this.state.assignments;
-    return assignments.map((assignment, index) => (
-      <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>     {assignment.Class}</NormalText></View>
-        <View style={{flex:1}}><NormalText>     {assignment.Due}</NormalText></View>
+    if (this.state.tabShown == 3) {
+      <View style={styles.tables}>
+        <View style={{flex:1}}><NormalText>Class:</NormalText></View>
+        <View style={{flex:1}}><NormalText>Grade Percentage:</NormalText></View>
       </View>  
-    )) 
+      return assignments.map((assignment, index) => (
+        <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
+          <View style={{flex:1}}><NormalText>     {assignment.Class}</NormalText></View>
+          <View style={{flex:1}}><NormalText>     {assignment.Due}</NormalText></View>
+        </View>  
+      )) 
+    }
   }
 
   setDate = () => {
@@ -320,13 +324,17 @@ export default class App extends React.Component {
     this.setState({dummy: true});
   }
 
+  selectTab = (n) => {
+    this.setState({tabShown: n});
+  }
+
 
 
   render() {
     return (
       <View style={{
         width: screenDimensions.screenWidth,
-        height: 2 * screenDimensions.screenHeight,
+        height: screenDimensions.screenHeight,
         backgroundColor: Colors.blueGray,
       }}>
         <View style={styles.assignmentBox}>
@@ -338,27 +346,10 @@ export default class App extends React.Component {
           </View>
         <View>
         {this.state.showGoing == 1 ? 
-          <View>
-            <NormalText>Ongoing Meetings</NormalText>
-            <View style={styles.tables}>
-              <View style={{flex:1}}><NormalText>      Start Time:</NormalText></View>
-              <View style={{flex:1}}><NormalText>Class Name:</NormalText></View>
-              <View style={{flex:1}}><NormalText>      Link:</NormalText></View>
-            </View>
-            {this.listOngoingMeetings()}
-          </View> 
+          <View><NormalText>Ongoing Meetings</NormalText>{this.listOngoingMeetings()}</View> 
           : <NormalText>No Ongoing Meetings!</NormalText>}
-          {this.state.showUpcoming == 1 ? 
-          <View>
-            <NormalText>Upcoming Meetings</NormalText>
-            <View style={styles.tables}>
-              <View style={{flex:1}}><NormalText>      Start Time:</NormalText></View>
-              <View style={{flex:1}}><NormalText>Class Name:</NormalText></View>
-              <View style={{flex:1}}><NormalText>      Link:</NormalText></View>
-            </View>
-            {this.putOutMeetings()}
-          </View> 
-          : <NormalText>No Upcoming Meetings for Today!</NormalText>}
+          <NormalText>Upcoming Meetings</NormalText>
+          {this.putOutMeetings()}
         </View>
         {this.state.openClass == 1 ? 
         <View>
@@ -377,17 +368,13 @@ export default class App extends React.Component {
         </View>
         <View style={styles.assignmentBox}>
           <View style={{flexDirection: 'row'}}>
-          <View style={styles.headerBox}>
+          <Pressable style={styles.headerBox} onPress={() => this.selectTab(2)}>
             <Text style={styles.sectionTitles}>Assignments</Text>
-          </View>
+          </Pressable>
             <Pressable style={styles.addition} onPress={() => this.addAssignment()}>+</Pressable>
           </View>
           <View style={{ flexDirection: 'column' }}>
-            <View style={styles.tables}>
-            <View style={{flex:1}}><NormalText>Class:</NormalText></View>
-              <View style={{flex:1}}><NormalText>Assignment Name:</NormalText></View>
-              <View style={{flex:1}}><NormalText>Due Date:</NormalText></View>
-            </View>  
+          
             <View>{this.listAssignments()}</View>
             {this.state.openAssignment == 1 ? 
         <View>
@@ -407,14 +394,10 @@ export default class App extends React.Component {
         </View>
 
         <View style={styles.assignmentBox}>
-          <View style={styles.headerBox}>
+          <Pressable style={styles.headerBox} onPress={() => this.selectTab(3)}>
             <Text style={styles.sectionTitles}>Grades</Text>
-          </View>
+          </Pressable>
           <View style={{ flexDirection: 'column' }}>
-            <View style={styles.tables}>
-            <View style={{flex:1}}><NormalText>Class:</NormalText></View>
-              <View style={{flex:1}}><NormalText>Grade Percentage:</NormalText></View>
-            </View>  
             <View>{this.listGrades()}</View>
           </View>
         </View>
