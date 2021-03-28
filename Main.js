@@ -10,6 +10,8 @@ import {
   LibraryStyles,
 } from './ComponentLibrary';
 import { Data } from './Data';
+import GetCanvasAssignments from './Files/GetCanvasAssignments';
+import GetGrades from './Files/GetGrades';
 
 
 
@@ -163,8 +165,8 @@ export default class App extends React.Component {
       
     }
 
-    this.getGrades();
-    this.getCanvasAssignments();
+    this.compileAssignments();
+    this.compileGrades();
     
   }
 
@@ -186,8 +188,8 @@ export default class App extends React.Component {
     }, 500);
   }
 
-  getCanvasAssignments = () => {
-    Data.forEach((element, index) => {
+  compileAssignments = () => {
+    (GetCanvasAssignments()).forEach((element, index) => {
       let className = element.ClassName;
       let assignmentName = element.AssignmentName;
       let dueDate = element.DueDate;
@@ -205,8 +207,8 @@ export default class App extends React.Component {
     });
   }
 
-  getGrades = () => {
-    Data.forEach((element, index) => {
+  compileGrades = () => {
+    (GetGrades()).forEach((element, index) => {
       let className = element.ClassName;
       let gradePercent = element.Grade;
       let grade = {
