@@ -184,7 +184,6 @@ export default class App extends React.Component {
       this.setDate();
       this.todaysMeetings();
     }, 500);
-
   }
 
   getCanvasAssignments = () => {
@@ -253,7 +252,7 @@ export default class App extends React.Component {
 
        let ongoing = this.state.sub.filter((element, index) => {
         //need to add something for the start time hours and minutes
-        if ((element.startHour < this.state.hour || (element.startHour == this.state.hour && element.startMin < this.state.minutes)) && (element.endHour > this.state.hour || (element.endHour == this.state.hour && element.endMin > this.state.minutes))){
+        if ((element.startHour < this.state.hour || (element.startHour <= this.state.hour && element.startMin < this.state.minutes)) && (element.endHour > this.state.hour || (element.endHour >= this.state.hour && element.endMin > this.state.minutes))){
            return element;
         }
       });
@@ -274,18 +273,21 @@ export default class App extends React.Component {
   listOngoingMeetings = () => { 
     let ongoingMeetings = this.state.ongoingMeeting;
     for (let i = 0; i < ongoingMeetings.length; i++){
-      if (ongoignMeetings[i].startMin < 10){
-        ongoignMeetings[i].startMin = "0" + ongoignMeetings[i].startMin;
-      }
+      let string = ongoingMeetings[i].startMin +'';
+      if (string.indexOf('m') != -1){
+        if (ongoingMeetings[i].startMin < 10){
+          ongoingMeetings[i].startMin = "0" + ongoingMeetings[i].startMin;
+        }
 
-      if(ongoignMeetings[i].startHour == 0){
-        ongoignMeetings[i].startHour = 12;
-      }
+        if(ongoingMeetings[i].startHour == 0){
+          ongoingMeetings[i].startHour = 12;
+        }
 
-      if(ongoignMeetings[i].startHour <= 12){
-        ongoignMeetings[i].startMin = ongoignMeetings[i].startMin + " am";
-      } else {
-        ongoignMeetings[i].startMin = ongoignMeetings[i].startMin + " pm";
+        if(ongoingMeetings[i].startHour <= 12){
+          ongoingMeetings[i].startMin = ongoingMeetings[i].startMin + " am";
+        } else {
+          ongoingMeetings[i].startMin = ongoingMeetings[i].startMin + " pm";
+        }
       }
 
     }
@@ -303,21 +305,24 @@ export default class App extends React.Component {
   putOutMeetings = () => {
     let upcomingMeetings = this.state.meetingForToday;
     for (let i = 0; i < upcomingMeetings.length; i++){
-      if (upcomingMeetings[i].startMin < 10){
-        upcomingMeetings[i].startMin = "0" + upcomingMeetings[i].startMin;
-      }
+      let string = upcomingMeetings[i].startMin + '';
+      if (string.indexOf('m') != -1){
+        if (upcomingMeetings[i].startMin < 10){
+          upcomingMeetings[i].startMin = "0" + upcomingMeetings[i].startMin;
+        }
 
-      if(upcomingMeetings[i].startHour == 0){
-        upcomingMeetings[i].startHour = 12;
-      }
+        if(upcomingMeetings[i].startHour == 0){
+          upcomingMeetings[i].startHour = 12;
+        }
 
-      if(upcomingMeetings[i].startHour <= 12){
-        upcomingMeetings[i].startMin = upcomingMeetings[i].startMin + " am";
-      } else {
-        upcomingMeetings[i].startMin = upcomingMeetings[i].startMin + " pm";
+        if(upcomingMeetings[i].startHour <= 12){
+          upcomingMeetings[i].startMin = upcomingMeetings[i].startMin + " am";
+        } else {
+          upcomingMeetings[i].startMin = upcomingMeetings[i].startMin + " pm";
+        }
       }
-
     }
+
     return upcomingMeetings.map((meeting, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
         <View style={{flex:1}}><NormalText>      {meeting.startHour}:{meeting.startMin}</NormalText></View>

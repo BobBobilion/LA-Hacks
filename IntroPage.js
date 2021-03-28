@@ -94,12 +94,27 @@ export default class IntroPage extends React.Component {
             </View>
   
             <View style={styles.row}>
-              <TextInput
-                placeholder={'Class Name'}
-                style={styles.infoInput}
-                value={this.state.newName}
-                onChangeText={(newName) => this.setState({ newName })}
-              />
+              <View>
+                <TextInput
+                  onChangeText={(aeUser) => this.setState({ aeUser })}
+                  style={styles.infoInput}
+                  value={this.state.aeUser}
+                  placeholder={'Aeries Username/Email'}
+                />
+      
+                <TextInput
+                  onChangeText={(aePass) => this.setState({ aePass })}
+                  style={styles.infoInput}
+                  value={this.state.aePass}
+                  placeholder={'Aeries Password'}
+                />
+                <TextInput
+                  placeholder={'Class Name'}
+                  style={styles.infoInput}
+                  value={this.state.newName}
+                  onChangeText={(newName) => this.setState({ newName })}
+                />
+              </View>
               <Pressable
                 style={styles.addButton}
                 onPress={() => this.addClass()}>
@@ -194,17 +209,20 @@ export default class IntroPage extends React.Component {
     row: {
       flexDirection: 'row',
       width: '100%',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       marginVertical: 5,
+      alignContent: 'center',
     },
     addButton: {
       width: '5%',
+      height: '50%',
       margin: 3,
       borderColor: Colors.cyan,
       borderWidth: 2,
       backgroundColor: 'white',
       paddingTop: 2,
       borderRadius: 3,
+      justifyContent: 'center',
     },
     addButtonText: {
       color: Colors.blueGray,
