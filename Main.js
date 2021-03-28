@@ -64,7 +64,7 @@ export default class App extends React.Component {
           endHour: 11, 
           endMin: 30,
         },{
-          meetingLink: "https://iusd.zoom.us/j/88065929452?pwd=Q09zdnlvK21CbUlqRVIwYWx3a21kZz09",
+          meetingLink: "https://iusd.zoom.us/j/88065929452?pwd=Q09zdnlvK21CbUlqRVIwYWx3a21kZz09", 
           className: "Language",
           startHour: 11,
           startMin: 45,
