@@ -68,7 +68,7 @@ export default class App extends React.Component {
           className: "Arthur Facredyn",
           startHour: 8,
           startMin: 2,
-          endHour: 9, 
+          endHour: 10, 
           endMin: 0,
         },
         {
@@ -143,7 +143,7 @@ export default class App extends React.Component {
 
         openAssignment: 0,
         openClass: 0,
-        showGoing: 1,
+        showGoing: 0,
         day: 0,
         assignClass: '',
         assignName: '',
@@ -211,13 +211,15 @@ export default class App extends React.Component {
 
       if (upcoming.length > 0){
         this.setState({showUpcoming: 1});
+      } else {
+        this.setState({showUpcoming: 0});
       }
 
       this.setState({meetingForToday: upcoming})
 
        let ongoing = this.state.sub.filter((element, index) => {
         //need to add something for the start time hours and minutes
-        if ((element.startHour < this.state.hour || (element.startHour == this.state.hour && element.startMin < this.state.minutes)) && (element.endHour > this.state.hour || (element.endHour == this.state.hour && element.endMin > this.state.minutes))){
+        if ((element.startHour < this.state.hour || (element.startHour <= this.state.hour && element.startMin < this.state.minutes)) && (element.endHour > this.state.hour || (element.endHour >= this.state.hour && element.endMin > this.state.minutes))){
            return element;
         }
       });
@@ -231,8 +233,6 @@ export default class App extends React.Component {
 
       this.setState({ongoingMeeting: ongoing});
 
-      console.log(this.state.sub);
-      console.log(this.state.ongoingMeeting);
       this.setState({dummy: true});
 
   }
