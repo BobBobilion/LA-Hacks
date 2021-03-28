@@ -24,21 +24,24 @@ export default class IntroPage extends React.Component {
       newClass: '',
       newLink: '',
       newTime: '',
+      newEndTime: '',
       classes: [],
     };
 
     addClass = () => {
-      if(this.state.newClass!=='' && this.state.newLink!=='' && this.state.newTime!==''){
+      if(this.state.newClass!=='' && this.state.newLink!=='' && this.state.newTime!=='' && this.state.newEndTime!==''){
         this.setState({canAdd: 'Add'});
         let classes = this.state.classes;
         let zoomLink = this.state.newLink;
         let time = this.state.newTime;
         let name = this.state.newClass;
-        let aClassInfo = {aName: name, link: zoomLink, startTime: time};
+        let moreTime = this.state.newEndTime;
+        let aClassInfo = {aName: name, link: zoomLink, startTime: time, newEndTime: moreTime};
         classes.push(aClassInfo);
         this.setState({newTime: '' });
         this.setState({newClass: ''});
         this.setState({newLink: '' });
+        this.setState({newEndTime: ''});
       }else{
         this.setState({canAdd: 'Missing Info'})
       }
@@ -117,6 +120,12 @@ export default class IntroPage extends React.Component {
                   onChangeText={(newClass) => this.setState({ newClass })}
                 />
                 <TextInput
+                  onChangeText={(newEndTime) => this.setState({ newEndTime })}
+                  style={styles.infoInput}
+                  value={this.state.newEndTime}
+                  placeholder={'What is the end time?'}
+                />
+                <TextInput
                   onChangeText={(newTime) => this.setState({ newTime })}
                   style={styles.infoInput}
                   value={this.state.newTime}
@@ -129,7 +138,6 @@ export default class IntroPage extends React.Component {
                   value={this.state.newLink}
                   placeholder={'What is the meeting link?'}
                 />
-                <Text>{this.state.newClass} {this.state.newLink} {this.state.newTime}</Text>
               </View>
               <Pressable
                 style={styles.addButton}
