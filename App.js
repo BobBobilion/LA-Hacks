@@ -28,7 +28,7 @@ export default class App extends React.Component {
         Assignment: assignmentName,
         Due: dueDate,
       };
-      assignments.push(assignment);
+        assignments.push(assignment);
     });
 
     this.state = {
@@ -107,6 +107,41 @@ export default class App extends React.Component {
       this.updateWindow();
     }, 500);
     this.setDate();
+    this.todaysMeetings();
+  }
+
+  todaysMeetings = () => {
+    let sub = [];
+      if (this.state.day == 1){
+        sub = this.state.practiceSet[0];
+      } else if (this.state.day == 2){
+        sub = this.state.practiceSet[1];
+      } else if (this.state.day == 3){
+        sub = this.state.practiceSet[2];
+      } else if (this.state.day == 4){
+        sub = this.state.practiceSet[3];
+      } else if (this.state.day == 5){
+        sub = this.state.practiceSet[4];
+      }  else if (this.state.day == 0){
+        sub = this.state.practiceSet[5];
+      } else if (this.state.day == 6){
+        sub = this.state.practiceSet[6];
+      } 
+
+
+
+  }
+
+  putOutMeetings = () => {
+    if (meetingForToday.length == 0){
+      //change a variable to say: No meetings for today
+    } else {
+      // return this.state.meetingForToday.map(element, index) => {
+      //   // <View>
+
+      //   // </View>
+      // }
+    }
   }
 
   //MAKES A TABLE FOR ASSIGNMENTS
@@ -114,9 +149,9 @@ export default class App extends React.Component {
     let assignments = this.state.assignments;
     return assignments.map((assignment, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>    - {assignment.Class}</NormalText></View>
-        <View style={{flex:1}}><NormalText>    - {assignment.Assignment}</NormalText></View>
-        <View style={{flex:1}}><NormalText>    - {assignment.Due}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {assignment.Class}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {assignment.Assignment}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {assignment.Due}</NormalText></View>
       </View>  
     )) 
   }
