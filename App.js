@@ -60,7 +60,7 @@ export default class App extends React.Component {
           meetingLink: "link",
           className: "Arthur Facredyn",
           startHour: 9,
-          startMin: 0,
+          startMin: "00",
           endTime: 12,
           endMin: 0,
         },
@@ -84,7 +84,7 @@ export default class App extends React.Component {
           meetingLink: "link2",
           className: "Arthur Facredyn2",
           startHour: 9,
-          startMin: 0,
+          startMin: "00",
           endTime: 12,
           endMin: 0,
         }],
@@ -216,6 +216,8 @@ export default class App extends React.Component {
       
        if (ongoing.length > 0){
         this.setState({showGoing: 1});
+       } else {
+         this.setState({showGoing: 0});
        }
 
        this.setState({ongoingMeeting: ongoing});
