@@ -32,7 +32,8 @@ export default class App extends React.Component {
     });
 
     this.state = {
-      assignments,practiceSet: {
+      assignments,
+      practiceSet: {
         mon:[{
           meetingLink: "link",
           className: "Arthur Facredyn",
@@ -83,13 +84,11 @@ export default class App extends React.Component {
 
         openClass: 0,
         showGoing: 0,
-        day: 0,
+        day: '',
         nameClass: '',
         link: '',
         timeStart: '',
         timeEnd: '',
-        hour: 0,
-        minutes: 0,
     }
     
   }
@@ -108,43 +107,6 @@ export default class App extends React.Component {
       this.updateWindow();
     }, 500);
     this.setDate();
-    this.todaysMeetings();
-  }
-
-  todaysMeetings = () => {
-    let sub = [];
-      if (day == 1){
-        sub = practiceSet[0];
-      } else if (day == 2){
-        sub = practiceSet[1];
-      } else if (day == 3){
-        sub = practiceSet[2];
-      } else if (day == 4){
-        sub = practiceSet[3];
-      } else if (day == 5){
-        sub = practiceSet[4];
-      }  else if (day == 0){
-        sub = practiceSet[5];
-      } else if (day == 6){
-        sub = practiceSet[6];
-      } 
-
-      for (var element in meetingsForToday){
-        
-      }
-
-  }
-
-  putOutMeetings = () => {
-    if (meetingForToday.length == 0){
-      //change a variable to say: No meetings for today
-    } else {
-      // return this.state.meetingForToday.map(element, index) => {
-      //   // <View>
-
-      //   // </View>
-      // }
-    }
   }
 
   //MAKES A TABLE FOR ASSIGNMENTS
@@ -152,17 +114,15 @@ export default class App extends React.Component {
     let assignments = this.state.assignments;
     return assignments.map((assignment, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>      {assignment.Class}</NormalText></View>
-        <View style={{flex:1}}><NormalText>      {assignment.Assignment}</NormalText></View>
-        <View style={{flex:1}}><NormalText>      {assignment.Due}</NormalText></View>
+        <View style={{flex:1}}><NormalText>    - {assignment.Class}</NormalText></View>
+        <View style={{flex:1}}><NormalText>    - {assignment.Assignment}</NormalText></View>
+        <View style={{flex:1}}><NormalText>    - {assignment.Due}</NormalText></View>
       </View>  
     )) 
   }
 
   setDate = () => {
     this.setState({day: (new Date()).getDay()});
-    this.setState({hour: (new Date()).getHours()});
-    this.setState({minutes: (new Date()).getMinutes()});
   }
 
   addClass = () => {
@@ -223,14 +183,12 @@ export default class App extends React.Component {
             <Text style={styles.sectionTitles}>Grades</Text>
           </View>
           <View style={{ flexDirection: 'column' }}>
-            <Button
-              onPress={() => console.log('button 1 pressed')}
-              onPressIn={() => console.log('pressIn')}
-              onPressOut={() => console.log('pressOut')}
-              onLongPress={() => console.log('Longpress')}>
-              button 1
-            </Button>
-            
+            <View style={styles.tables}>
+            <View style={{flex:1}}><NormalText>Class:</NormalText></View>
+              <View style={{flex:1}}><NormalText>Assignment Name:</NormalText></View>
+              <View style={{flex:1}}><NormalText>Due Date:</NormalText></View>
+            </View>  
+            <View>{this.listAssignments()}</View>
           </View>
         </View>
 
@@ -302,7 +260,8 @@ const styles = StyleSheet.create({
     marginVertical: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    backgroundColor: Colors.gray,
   }
 });
   
