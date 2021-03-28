@@ -47,7 +47,7 @@ export default class App extends React.Component {
     timeEnd: '',
 
     practiceSet: [
-      {
+      {mon:[{
         meetingLink: "link",
         className: "Arthur Facredyn",
         startTime: "9",
@@ -58,20 +58,23 @@ export default class App extends React.Component {
         className: "Arthur Facredyn2",
         startTime: "9",
         endTime: "12",
-      },
-      {
+      }]},
+
+      {tues:[{
         meetingLink: "link3",
         className: "Arthur Facredyn3",
         startTime: "12",
         endTime: "13",
-      },
-      {
+      }]},
+
+      {wed:[{
         meetingLink: "link4",
         className: "Arthur Facredyn4",
         startTime: "8",
         endTime: "10",
-      },
-      {
+      }]},
+
+      {thurs:[{
         meetingLink: "link5",
         className: "Arthur Facredyn5",
         startTime: "9",
@@ -82,13 +85,14 @@ export default class App extends React.Component {
         className: "Arthur Facredyn6",
         startTime: "7",
         endTime: "9",
-      },
-      {
+      }]},
+
+      {fri:[{
         meetingLink: "link7",
         className: "Arthur Facredyn7",
         startTime: "14",
         endTime: "16",
-      },],
+      },]}],
   }
 
 
@@ -96,7 +100,7 @@ export default class App extends React.Component {
   updateWindow = () => {
     screenDimensions.screenWidth = Dimensions.get('window').width;
     screenDimensions.screenHeight = Dimensions.get('window').height;
-  };
+  }
 
   //TIMER FOR WINDOW DIMENSION CHECK
   componentDidMount = () => {
@@ -171,22 +175,12 @@ export default class App extends React.Component {
             <Text style={styles.sectionTitles}>Assignments</Text>
           </View>
           <View style={{ flexDirection: 'column' }}>
-            <Button
-              onPress={() => console.log('button 1 pressed')}
-              onPressIn={() => console.log('pressIn')}
-              onPressOut={() => console.log('pressOut')}
-              onLongPress={() => console.log('Longpress')}>
-              button 1
-            </Button>
             <View style={styles.tables}>
             <View style={{flex:1}}><NormalText>Class:</NormalText></View>
               <View style={{flex:1}}><NormalText>Assignment Name:</NormalText></View>
               <View style={{flex:1}}><NormalText>Due Date:</NormalText></View>
             </View>  
-            <View>{this.listAssignments()}</View>
-            <View style={styles.assignments}>
-              <Text>oi;jasdf</Text>
-            </View>
+            <View style={styles.table}>{this.listAssignments()}</View>
           </View>
         </View>
 
