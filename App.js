@@ -83,12 +83,13 @@ export default class App extends React.Component {
 
         openClass: 0,
         showGoing: 0,
-        day: '',
+        day: 0,
         nameClass: '',
         link: '',
         timeStart: '',
         timeEnd: '',
-
+        hour: 0,
+        minutes: 0,
     }
     
   }
@@ -107,13 +108,44 @@ export default class App extends React.Component {
       this.updateWindow();
     }, 500);
     this.setDate();
+    this.todaysMeetings();
   }
 
-  // grabMeetings = () => {
-  //   return this.state.practiceSet.map(element, index) => {
-      
-  //   }
-  // }
+  todaysMeetings = () => {
+    let sub = [];
+      if (day == 1){
+        sub = practiceSet[0];
+      } else if (day == 2){
+        sub = practiceSet[1];
+      } else if (day == 3){
+        sub = practiceSet[2];
+      } else if (day == 4){
+        sub = practiceSet[3];
+      } else if (day == 5){
+        sub = practiceSet[4];
+      }  else if (day == 0){
+        sub = practiceSet[5];
+      } else if (day == 6){
+        sub = practiceSet[6];
+      } 
+
+      for (var element in meetingsForToday){
+        
+      }
+
+  }
+
+  putOutMeetings = () => {
+    if (meetingForToday.length == 0){
+      //change a variable to say: No meetings for today
+    } else {
+      // return this.state.meetingForToday.map(element, index) => {
+      //   // <View>
+
+      //   // </View>
+      // }
+    }
+  }
 
   //MAKES A TABLE FOR ASSIGNMENTS
   listAssignments = () => {
@@ -129,6 +161,8 @@ export default class App extends React.Component {
 
   setDate = () => {
     this.setState({day: (new Date()).getDay()});
+    this.setState({hour: (new Date()).getHours()});
+    this.setState({minutes: (new Date()).getMinutes()});
   }
 
   addClass = () => {
@@ -268,8 +302,7 @@ const styles = StyleSheet.create({
     marginVertical: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: Colors.gray,
+    justifyContent: 'space-around'
   }
 });
   
