@@ -68,15 +68,15 @@ export default class App extends React.Component {
           meetingLink: "link2",
           className: "Arthur Facredyn2",
           startHour: 9,
-          startMin: 0,
+          startMin: "00",
           endTime: 12,
           endMin: 0,
         }],
         sat:[{
           meetingLink: "link",
           className: "Arthur Facredyn",
-          startHour: 23,
-          startMin: 0,
+          startHour: 22,
+          startMin: "00",
           endHour: 23,
           endMin: 55
         },
@@ -162,6 +162,7 @@ export default class App extends React.Component {
   updateWindow = () => {
     screenDimensions.screenWidth = Dimensions.get('window').width;
     screenDimensions.screenHeight = Dimensions.get('window').height;
+    this.setState({dummy: true});
   }
 
   //TIMER FOR WINDOW DIMENSION CHECK
@@ -202,16 +203,16 @@ export default class App extends React.Component {
 
       this.setState({meetingForToday: upcoming})
 
-      // let ongoing = this.state.sub.filter((element, index) => {
-      //   //need to add something for the start time hours and minutes
-      //   if (element.startHour > this.state.hour && element.startMin > this.state.minutes){
-      //     return element;
-      //   } else if (element.startHour == this.state.hour && element.startMin > this.state.minutes){
-      //     return element;
-      //   }
-      // });
+       let ongoing = this.state.sub.filter((element, index) => {
+         //need to add something for the start time hours and minutes
+         if (element.startHour > this.state.hour && element.startMin > this.state.minutes){
+           return element;
+         } else if (element.startHour == this.state.hour && element.startMin > this.state.minutes){
+           return element;
+         }
+       });
 
-      // this.setState({ongoingMeeting: ongoing});
+       this.setState({ongoingMeeting: ongoing});
 
       console.log(this.state.sub);
       console.log(this.state.ongoingMeeting);
@@ -220,14 +221,14 @@ export default class App extends React.Component {
   }
 
   listOngoingMeetings = () => {
-    if (this.state.meetingForToday.length == 0){
+    if (this.state.ongoingMeeting.length == 0){
       //change a variable to say: No meetings for today
-
+      null;
     } else {
       this.setState.showGoing = 1; 
-      return this.state.meetingForToday.map((element, index) => {
+      return this.state.ongoingMeeting.map((element, index) => {
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>{this.state.meetingForToday[index].startHour}</NormalText></View>
+        <View style={{flex:1}}><NormalText>{this.state.meetingForToday[index].startHour}:{element.startMin}</NormalText></View>
         <View style={{flex:1}}><NormalText>      {this.state.meetingForToday[index].className}</NormalText></View>
         <View style={{flex:1}}><NormalText>      {this.state.meetingForToday[index].meetingLink}</NormalText></View>
       </View> 
@@ -239,7 +240,7 @@ export default class App extends React.Component {
     let upcomingMeetings = this.state.meetingForToday;
     return upcomingMeetings.map((meeting, index) => (
       <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-        <View style={{flex:1}}><NormalText>      {meeting.className}</NormalText></View>
+        <View style={{flex:1}}><NormalText>      {meeting.startHour}:{meeting.startMin}</NormalText></View>
         <View style={{flex:1}}><NormalText>      {meeting.className}</NormalText></View>
         <View style={{flex:1}}><NormalText>      {meeting.meetingLink}</NormalText></View>
       </View>  
@@ -270,6 +271,8 @@ export default class App extends React.Component {
 
   setDate = () => {
     this.setState({day: (new Date()).getDay()});
+    this.setState({hour: (new Date()).getHours()});
+    this.setState({minutes: (new Date()).getMinutes()});
   }
 
   addClass = () => {
@@ -317,7 +320,11 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={LibraryStyles.container}>
+      <View style={{
+        width: screenDimensions.screenWidth,
+        height: 2 * screenDimensions.screenHeight,
+        backgroundColor: Colors.blueGray,
+      }}>
         <View style={styles.assignmentBox}>
           <View style={{flexDirection: "row"}}>
             <View style={styles.headerBox}>
@@ -395,7 +402,8 @@ export default class App extends React.Component {
         <NormalText>
           Min: {this.state.minutes}
           Hours: {this.state.hour}
-          {/* upcoming: {this.state.meetingForToday[0].meetingLink} */}
+          Width: {screenDimensions.screenWidth}
+          Height: {screenDimensions.screenHeight}
         </NormalText>
       </View>
     );
