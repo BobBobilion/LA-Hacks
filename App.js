@@ -60,7 +60,7 @@ export default class App extends React.Component {
           meetingLink: "link",
           className: "Arthur Facredyn",
           startHour: 9,
-          startMin: 09,
+          startMin: 9,
           endTime: 12, 
           endMin: 0,
         },
