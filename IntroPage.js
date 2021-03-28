@@ -9,7 +9,6 @@ import {
   Button,
   LibraryStyles,
 } from './ComponentLibrary';
-import App from './App';
 
 export default class App extends React.Component {
     //create state here
@@ -18,7 +17,6 @@ export default class App extends React.Component {
       canvPass: '',
       aeUser: '',
       aePass: '',
-      canPass: 'Continue',
     };
   
     //the values in the parenthesis are the input.
@@ -37,14 +35,6 @@ export default class App extends React.Component {
         aePass: prevState.aePass,
       }));
       console.log(this.state.aeUser + " " + this.state.aePass)
-    }
-    
-    nextPage = () => {
-        if(this.state.aePass!=='' && this.state.aeUser!=='' && this.state.canvPass!=='' && this.state.canvUser!==''){
-            this.props.goToPage('App');
-        } else{
-            this.setState({canPass: 'Please Fill out All Fields'})
-        }
     }
   
     render() {
@@ -93,11 +83,51 @@ export default class App extends React.Component {
             <Pressable onPress={() => this.saveAeries()} style={styles.button}>
               <Text style={styles.buttonText}>Save Aeries Information</Text>
             </Pressable>
-
-            <Pressable onPress={() => this.nextPage()} style={styles.button}>
-              <Text style={styles.buttonText}>{this.state.canPass}</Text>
-            </Pressable>
+  
           </View>
+  
+  
+          <View style={styles.title}>
+            <View style={styles.classBox}>
+              <Text style={styles.peopleTitle}>People</Text>
+              <FlatList
+                style={styles.nameScroll}
+                data={this.state.people}
+                renderItem={(person) => (
+                  <Text style={styles.pairText}>{person.item}</Text>
+                )}
+              />
+            </View>
+          </View>
+  
+          <View 
+            style={{
+            flexDirection: 'row',
+            width: '95%',
+            justifyContent: 'space-between',
+            marginVertical: 5,
+          }}>
+              <TextInput
+                placeholder={'Enter a name to add'}
+                style={styles.infoInput}
+                value={this.state.newName}
+                onChangeText={(newName) => this.setState({ newName })}
+              />
+              <Pressable
+                style={styles.addRemoveButton}
+                onPress={() => this.addName()}>
+                <Text style={styles.addRemoveButtonText}>Add</Text>
+              </Pressable>
+            </View>
+  
+          <TextInput
+            style={styles.infoInput}
+            value={this.state.userInput}
+            placeholder={'Class Name'}
+            onChangeText={(text) => this.changeText(text)}
+            onSubmitEditing={(text) => this.endEditing(text)}
+          />
+          
         </View>
       );
     }
