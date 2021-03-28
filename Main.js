@@ -189,14 +189,17 @@ export default class App extends React.Component {
   }
 
   compileAssignments = () => {
-    (GetCanvasAssignments()).forEach((element, index) => {
-      let className = element.ClassName;
-      let assignmentName = element.AssignmentName;
-      let dueDate = element.DueDate;
+    let classes = GetCanvasAssignments().classes;
+    let assignments = GetCanvasAssignments().assignments;
+    let dates = GetCanvasAssignments().dueDates;
+    classes.forEach((element, index) => {
+      let className = element;
+      let assignmentName = assignments[index];
+      let dueDate = dates[index];
       let assignment = {
         class: className,
         assignment: assignmentName,
-        dueDate: dueDate,
+        date: dueDate,
       };
       if(index<4){
         this.state.assignments.push(assignment);
@@ -208,13 +211,17 @@ export default class App extends React.Component {
   }
 
   compileGrades = () => {
-    (GetGrades()).forEach((element, index) => {
-      let className = element.ClassName;
-      let gradePercent = element.Grade;
+    console.log(GetGrades());
+    let classes = GetGrades().classes;
+    let grades = GetGrades().grades;
+    classes.forEach((element, index) => {
+      let className = element;
+      let gradePercent = grades[index];
       let grade = {
         class: className,
-        gradePercent: gradePercent,
+        gradePercentage: gradePercent + "%",
       };
+      this.state.grades.push(grade);
     });
   }
 
@@ -343,7 +350,7 @@ export default class App extends React.Component {
         <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
           <View style={{flex:1}}><NormalText>      {assignment.class}</NormalText></View>
           <View style={{flex:1}}><NormalText>      {assignment.assignment}</NormalText></View>
-          <View style={{flex:1}}><NormalText>      {assignment.dueDate}</NormalText></View>
+          <View style={{flex:1}}><NormalText>      {assignment.date}</NormalText></View>
         </View>  
       )) 
     }
@@ -354,8 +361,8 @@ export default class App extends React.Component {
     if (this.state.tabShown == 3) {
       return grades.map((grade, index) => (
         <View style={{paddingHorizontal: (screenDimensions.screenWidth*.1)/4, marginVertical: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', backgroundColor: ((index%2==1)?Colors.gray : Colors.lightGray) }}>
-          <View style={{flex:1}}><NormalText>     {grade.Class}</NormalText></View>
-          <View style={{flex:1}}><NormalText>     {grade.Due}</NormalText></View>
+          <View style={{flex:1}}><NormalText>     {grade.class}</NormalText></View>
+          <View style={{flex:1}}><NormalText>     {grade.gradePercentage}</NormalText></View>
         </View>  
       )) 
     }
@@ -503,14 +510,6 @@ export default class App extends React.Component {
           </View>
         </View>
 
-        
-        <NormalText>
-          Min: {this.state.minutes}
-          Hours: {this.state.hour}
-          Width: {screenDimensions.screenWidth}
-          Height: {screenDimensions.screenHeight}
-        </NormalText>
-
         <Pressable onPress={() => this.props.goToPage('IntroPage')}>
           <Text> Go to the Intro Page</Text>
         </Pressable>
@@ -522,7 +521,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   assignmentBox: {
     backgroundColor: 'white',
-    margin: screenDimensions.screenWidth * 0.05,
+    margin: screenDimensions.screenWidth * 0.03,
     padding: 10,
     width: screenDimensions.screenWidth * 0.9,
     borderTopLeftRadius: 10,
