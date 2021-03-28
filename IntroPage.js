@@ -78,7 +78,7 @@ export default class IntroPage extends React.Component {
   
 
 
-            
+
 
 
 
@@ -95,7 +95,7 @@ export default class IntroPage extends React.Component {
     container: {
       width: screenDimensions.screenWidth,
       height: screenDimensions.screenHeight,
-      backgroundColor: Colors.darkGreen,
+      backgroundColor: '#CAD8DE',
       alignItems: 'center',
     },
     titleCard:{
@@ -142,7 +142,7 @@ export default class IntroPage extends React.Component {
     },
     infoInput: {
       width: (screenDimensions.screenWidth)*.8,
-      backgroundColor: Colors.cyan,
+      backgroundColor: 'white',
       padding: 5,
       margin: 3,
       borderRadius: 3,
